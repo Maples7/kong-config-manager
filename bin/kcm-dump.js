@@ -4,11 +4,11 @@ const fs = require('fs');
 const debug = require('debug')('kcm:dump');
 const _ = require('lodash');
 const exit = require('../utils/exit');
+const dump = require('../lib/dump');
+const getConfigPath = require('../utils/get_config_path');
 const makeProgram = require('../utils/make_program');
-const parseParams = require('../utils/parse_params');
 
 const program = makeProgram();
-const params = parseParams(program);
 
 try {
   fs.accessSync(process.cwd(), fs.constants.W_OK);
@@ -18,29 +18,30 @@ try {
   );
 }
 
-if (params.host) {
-  dump(params.host, 'kcm-cli');
-} else if (params.file) {
-  const configs = require(params.file);
+if (program.host) {
+  dump(program.host, 'kcm-cli');
+} else if (program.file) {
+  const configPath = getConfigPath(program.file);
+  const configs = require(program.file);
   if (!_.isPlainObject(configs)) {
     exit('CLI configs in file should be a plain object');
   }
 
-  if (params.all) {
+  if (program.all) {
     _.forOwn(configs, (value, key) => {
       dump(value, key);
     });
-  } else if (params.instance) {
-    if (!configs[params.instance]) {
+  } else if (program.instance) {
+    if (!configs[program.instance]) {
       exit(
-        `instance ${params.instance} not found in CLI config file ${params.file}`
+        `instance ${program.instance} not found in CLI config file ${program.file}`
       );
     } else {
-      dump(configs[params.instance], params.instance);
+      dump(configs[program.instance], program.instance);
     }
   } else {
-    exit('params error');
+    exit('program error');
   }
 } else {
-  exit('params error');
+  exit('program error');
 }
