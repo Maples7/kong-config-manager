@@ -25,11 +25,13 @@
   },
   "homepage": "https://github.com/Maples7/kong-config-manager#readme",
   "dependencies": {
+    "bluebird": "^3.5.0",
     "chalk": "^2.0.1",
     "commander": "^2.11.0",
     "debug": "^2.6.8",
     "fs-extra": "^4.0.0",
     "lodash": "^4.17.4",
-    "request": "^2.81.0"
+    "request": "^2.81.0",
+    "request-promise": "^4.2.1"
   }
 }
