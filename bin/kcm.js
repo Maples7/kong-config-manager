@@ -6,6 +6,6 @@ const pkg = require('../package.json');
 program
   .version(pkg.version)
   .description(pkg.description)
-  .command('apply', 'apply kong configs to a live kong instance').alias('a')
-  .command('dump', 'dump live kong configs to your git repo').alias('d')
+  .command('apply', 'update kong configs to live kong instances, including CUD operations').alias('a')
+  .command('dump', 'dump live kong configs to your git repo, referring to R operation').alias('d')
   .parse(process.argv);

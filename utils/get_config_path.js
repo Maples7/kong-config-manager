@@ -1,11 +1,9 @@
 const fs = require('fs');
-const path = require('path');
 const exit = require('./exit');
+const getAbsolutePath = require('./get_absolute_path');
 
 module.exports = function getConfigPath(filePath) {
-  const ret = path.isAbsolute(filePath)
-    ? filePath
-    : path.resolve(process.cwd(), filePath);
+  const ret = getAbsolutePath(filePath);
 
   if (fs.existsSync(ret)) {
     try {

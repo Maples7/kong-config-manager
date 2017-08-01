@@ -1,7 +1,7 @@
 {
   "name": "kong-config-manager",
   "version": "1.0.0",
-  "description": "Kong CLI tool who can dump live config and apply your own backup config",
+  "description": "A CLI tool who can operate CURD on configs of live Kong instances",
   "bin": {
     "kcm": "./bin/kcm.js"
   },
