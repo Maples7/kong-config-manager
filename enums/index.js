@@ -8,5 +8,6 @@ module.exports = {
     snis: 'name',
     upstreams: 'id',
     targets: 'id'
-  }
+  },
+  REQUEST_TIMEOUT: 1500
 };
