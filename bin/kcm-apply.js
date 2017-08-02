@@ -4,6 +4,7 @@ const fs = require('fs');
 const Promise = require('bluebird');
 const chalk = require('chalk');
 const apply = require('../lib/apply');
+const dump = require('../lib/dump');
 const exit = require('../utils/exit');
 const getAbsolutePath = require('../utils/get_absolute_path');
 const getConfigs = require('../utils/get_configs');
@@ -20,7 +21,7 @@ function initApply(instance, url) {
   }
   url = _.trimEnd(url, '/');
   if (fs.existsSync(instancePath)) {
-    return apply(instancePath, url);
+    return apply(instancePath, url).then(() => dump(url, instance));
   } else {
     exit(`dir ./${instance} does NOT exist for instance ${instance}`);
   }
