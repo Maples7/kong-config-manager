@@ -21,7 +21,8 @@ try {
 let retPromise = null;
 
 if (program.host) {
-  retPromise = dump(program.host, 'kcm-cli');
+  program.instance = program.instance || 'main';
+  retPromise = dump(program.host, program.instance);
 } else if (program.file) {
   const configs = getConfigs(program.file);
 

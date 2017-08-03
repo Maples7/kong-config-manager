@@ -8,9 +8,10 @@ module.exports = function makeDir(dirName) {
   const dirPath = path.resolve(process.cwd(), dirName);
   debug(`Dir path is ${dirPath}`);
   try {
+    fse.removeSync(dirPath);
     fse.ensureDirSync(dirPath);
   } catch (e) {
     exit(`Fail to make dir ${dirName}: ${e}`);
   }
-  debug('Finished!');
+  debug(`mkdir ${dirName} finished!`);
 };

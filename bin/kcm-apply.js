@@ -1,8 +1,11 @@
 #!/usr/bin/env node
 
+process.env.UV_THREADPOOL_SIZE = 128;
+
 const fs = require('fs');
 const Promise = require('bluebird');
 const chalk = require('chalk');
+const _ = require('lodash');
 const apply = require('../lib/apply');
 const dump = require('../lib/dump');
 const exit = require('../utils/exit');
@@ -21,7 +24,11 @@ function initApply(instance, url) {
   }
   url = _.trimEnd(url, '/');
   if (fs.existsSync(instancePath)) {
-    return apply(instancePath, url).then(() => dump(url, instance));
+    console.log(chalk.green(`Ready to apply configs for ${instance}...`));
+    return apply(instancePath, url).then(() => {
+      console.log(chalk.green(`Success to apply configs for ${instance}!`));
+      return dump(url, instance);
+    });
   } else {
     exit(`dir ./${instance} does NOT exist for instance ${instance}`);
   }
