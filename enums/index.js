@@ -1,6 +1,7 @@
 module.exports = {
-  OBJECTS: ['apis', 'consumers', 'plugins', 'certificates', 'snis', 'upstreams'],
+  OBJECTS: ['cluster', 'apis', 'consumers', 'plugins', 'certificates', 'snis', 'upstreams'],
   IDENTIFIRES: {
+    cluster: 'name',
     apis: 'id',
     consumers: 'id',
     plugins: 'id',

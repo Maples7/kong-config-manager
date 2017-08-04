@@ -33,17 +33,23 @@ Under any folder which `kcm dump` creates, create a new JSON file with arbitrary
 
 **NOTE**:
 
-1. adding **new plugin** should be paid more attention. If you want to add a new plugin under some specific api, use `api_id` field in the new JSON file to achieve it. This field would be used as URL route's param for `POST - /apis/{name or id}/plugins/` API.
+0. As Kong's Admin APIs' document implies, `/cluster` has **NO** POST API.
 
-2. after success to add items, the JSON files you create manually would be removed.
+1. Adding **new plugin** should be paid more attention. If you want to add a new plugin under some specific api, use `api_id` field in the new JSON file to achieve it. This field would be used as URL route's param for `POST - /apis/{name or id}/plugins/` API.
+
+2. After success to add items, the JSON files you create manually would be removed.
 
 #### Update
 
 Just modify any existing items with the identify field unchanged, then run `kcm apply`.
 
+**NOTE**: As Kong's Admin APIs' document implies, `/cluster` and `/upstreams/{name or id}/targets` do **NOT** have PATCH or PUT APIs.
+
 #### Delete
 
 All you need to do is to remove the file of items you want to delete, then run `kcm apply`, 
+
+**NOTE**: Be careful about deleting cluster node.
 
 **ATTENTION**:
 
@@ -104,6 +110,10 @@ This tool are fully tested under version **0.10.x** of Kong, any other versions 
 ## Contribution
 
 If you want to contribute to this project, feel free to raise any PRs.
+
+## Relatives
+
+- [kong-mock-server](https://github.com/Maples7/kong-mock-server)
 
 ## License
 [GPLv3](LICENSE)

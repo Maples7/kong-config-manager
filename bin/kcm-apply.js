@@ -17,17 +17,17 @@ const program = makeProgram();
 
 let retPromise = null;
 
-function initApply(instance, url) {
+function initApply(instance, host) {
   const instancePath = getAbsolutePath(instance);
-  if (!_.isString(url)) {
+  if (!_.isString(host)) {
     exit('host mast be a string, for example: https://localhost:8444');
   }
-  url = _.trimEnd(url, '/');
+  host = _.trimEnd(host, '/');
   if (fs.existsSync(instancePath)) {
     console.log(chalk.green(`Ready to apply configs for ${instance}...`));
-    return apply(instancePath, url).then(() => {
+    return apply(instancePath, host).then(() => {
       console.log(chalk.green(`Success to apply configs for ${instance}!`));
-      return dump(url, instance);
+      return dump(host, instance);
     });
   } else {
     exit(`dir ./${instance} does NOT exist for instance ${instance}`);
