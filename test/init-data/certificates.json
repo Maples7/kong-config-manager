@@ -1,0 +1,16 @@
+[
+  {
+    "id": "21b69eab-09d9-40f9-a55e-c4ee47fada68",
+    "cert": "-----BEGIN CERTIFICATE-----...",
+    "key": "-----BEGIN RSA PRIVATE KEY-----...",
+    "snis": ["mockbin.com"],
+    "created_at": 1485521710265
+  },
+  {
+    "id": "95b19eab-09d9-40f9-a55e-c4ee47fada68",
+    "cert": "-----BEGIN CERTIFICATE-----...",
+    "key": "-----BEGIN RSA PRIVATE KEY-----...",
+    "snis": ["example.com"],
+    "created_at": 1485521710266
+  }
+]

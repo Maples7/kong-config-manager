@@ -111,6 +111,14 @@ This tool are fully tested under version **0.10.x** of Kong, any other versions 
 
 If you want to contribute to this project, feel free to raise any PRs.
 
+### Test
+
+Firstly, pull git submodule `kong-mock-server` and install all npm dependencies for test. 
+
+Then, make sure you have installed `kong-config-manager` or run `npm link` in the root directory of this project.
+
+Finally, run `npm test`.
+
 ## Relatives
 
 - [kong-mock-server](https://github.com/Maples7/kong-mock-server)

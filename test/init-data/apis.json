@@ -1,0 +1,32 @@
+[
+  {
+    "name": "api1",
+    "hosts": ["1.com", "2.com"],
+    "upstream_url": "mockbin.com",
+    "http_if_terminated": true,
+    "upstream_read_timeout": 6000,
+    "preserve_host": false,
+    "upstream_connect_timeout": 6000,
+    "strip_uri": true,
+    "https_only": false,
+    "retries": 5,
+    "upstream_send_timeout": 6000,
+    "created_at": 1502013470934,
+    "id": "60d8c00b-1d2e-4dab-8dfc-b3a8e04aa891"
+  },
+  {
+    "name": "api2",
+    "hosts": ["1.com", "2.com", "3.com"],
+    "upstream_url": "mockbin.com",
+    "http_if_terminated": true,
+    "upstream_read_timeout": 6000,
+    "preserve_host": false,
+    "upstream_connect_timeout": 6000,
+    "strip_uri": true,
+    "https_only": false,
+    "retries": 5,
+    "upstream_send_timeout": 6000,
+    "created_at": 1502013504702,
+    "id": "fc111281-5a6f-41fd-abf8-d4424250e25d"
+  }
+]

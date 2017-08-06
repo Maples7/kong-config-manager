@@ -1,0 +1,12 @@
+[
+  {
+    "name": "mockbin.com",
+    "ssl_certificate_id": "21b69eab-09d9-40f9-a55e-c4ee47fada68",
+    "created_at": 1485521710265
+  },
+  {
+    "name": "example.com",
+    "ssl_certificate_id": "34c49eab-09d9-40f9-a55e-c4ee47fada68",
+    "created_at": 1485521710267
+  }
+]

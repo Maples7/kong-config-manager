@@ -6,7 +6,18 @@
     "kcm": "./bin/kcm.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "ava"
+  },
+  "ava": {
+    "files": [
+      "test/index.js"
+    ],
+    "source": [
+      "lib/*.js",
+      "enums/*.js",
+      "bin/*.js"
+    ],
+    "failFast": true
   },
   "repository": {
     "type": "git",
@@ -35,6 +46,7 @@
     "request-promise": "^4.2.1"
   },
   "devDependencies": {
-    "ava": "^0.21.0"
+    "ava": "^0.21.0",
+    "shelljs": "^0.7.8"
   }
 }

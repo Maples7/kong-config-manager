@@ -1,0 +1,16 @@
+[
+  {
+    "id": "4661f55e-95c2-4011-8fd6-c5c56df1c9db",
+    "target": "1.2.3.4:80",
+    "weight": 15,
+    "upstream_id": "13611da7-703f-44f8-b790-fc1e7bf51b3e",
+    "created_at": 1485523507446
+  },
+  {
+    "id": "5552f66e-95c2-4011-8fd6-c5c56df1c9db",
+    "target": "1.2.3.4:80",
+    "weight": 15,
+    "upstream_id": "13611da7-703f-44f8-b790-fc1e7bf51b3e",
+    "created_at": 1485523507446
+  }
+]
