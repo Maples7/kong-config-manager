@@ -1,4 +1,12 @@
 # kong-config-manager
+
+[![Build Status](https://travis-ci.org/Maples7/kong-config-manager.svg?branch=master)](https://travis-ci.org/Maples7/kong-config-manager)
+[![Coverage Status](https://coveralls.io/repos/github/Maples7/kong-config-manager/badge.svg?branch=master)](https://coveralls.io/github/Maples7/kong-config-manager?branch=master)
+[![npm version](https://badge.fury.io/js/kong-config-manager.svg)](https://badge.fury.io/js/kong-config-manager)           
+
+[![NPM](https://nodei.co/npm/kong-config-manager.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/kong-config-manager/)
+[![NPM](https://nodei.co/npm-dl/kong-config-manager.png?months=6&height=3)](https://nodei.co/npm/kong-config-manager/)
+
 Yet another Kong CLI tool who can operate CURD on configs of dozens of live [Kong](https://getkong.org/) instances. In this way, the config of Kong can be version-controlled and rollback with the help of git.
 
 ## Usage

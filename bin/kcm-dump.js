@@ -10,14 +10,6 @@ const makeProgram = require('../utils/make_program');
 
 const program = makeProgram();
 
-// try {
-//   fs.accessSync(process.cwd(), fs.constants.W_OK);
-// } catch (e) {
-//   exit(
-//     `the program does not have write permission in current working directory: ${e}`
-//   );
-// }
-
 let retPromise = null;
 
 if (program.host) {

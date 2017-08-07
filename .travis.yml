@@ -11,8 +11,6 @@ before_install:
   - cd ./test/kong-mock-server && npm install --registry=https://registry.npm.taobao.org
   - cd ../../ 
   - npm link
-  - ls -alh
-  - chmod 777 ./test
 after_script:
   - './node_modules/.bin/nyc report --reporter=text-lcov | ./node_modules/.bin/coveralls'
 cache:
