@@ -55,15 +55,30 @@ Just modify any existing items with the identify field unchanged, then run `kcm 
 
 #### Delete
 
-All you need to do is to remove the file of items you want to delete, then run `kcm apply`, 
+All you need to do is to remove the file of items you want to delete, then run `kcm apply`.
 
 **NOTE**: Be careful about deleting cluster node.
 
 **ATTENTION**:
 
-after each `kcm apply`, the tool will exec `dump` automatically to keep your local config is always refresh and the same with the remote Kong config.
+after each `kcm apply`, the tool will exec `dump` automatically to keep your local config is always refreshed and the same with the remote Kong config.
 
 ### Examples
+
+#### CLI config file
+
+For example, `kcm-config.json` in the current working directory:
+
+```json
+{
+  "main": "http://192.168.99.100:8001",
+  "sec_test": "https://localhost:8444"
+}
+```
+
+The key would be also used as folder name with all configs of corresponding Kong instance in it, so do **NOT** use any illegal characters for a folder name.
+
+**NOTE**: the protocol like `http` or `https` can NOT be omitted.
 
 #### Commands
 ```sh
@@ -98,21 +113,6 @@ kcm apply --instance sec_test
 kcm apply --host https://localhost:8444 --instance sec_test
 ```
 
-#### CLI config file
-
-For example, `kcm-config.json` in the current working directory:
-
-```json
-{
-  "main": "http://192.168.99.100:8001",
-  "sec_test": "https://localhost:8444"
-}
-```
-
-The key would be also used as folder name with all configs of corresponding Kong instance in it, so do **NOT** use any illegal characters for a folder name.
-
-**NOTE**: the protocol like `http` or `https` can NOT be omitted.
-
 ## About Version
 
 This tool are fully tested under version **0.10.x** of Kong, any other versions are NOT guaranteed. Theoretically, once the admin APIs of Kong remain unchanged, this tool would work perfectly. But again, nothing is determined for sure.
@@ -128,6 +128,15 @@ Firstly, pull git submodule `kong-mock-server` and install all npm dependencies 
 Then, make sure you have installed `kong-config-manager` or run `npm link` in the root directory of this project.
 
 Finally, run `npm test`.
+
+### TODO
+
+- [ ] use more readable field as filename, remember to filenamify
+- [ ] auto-generate a CLI config file template `kcm-config.json` at the beginning
+- [ ] add support for operating on part of objects, not all. (consumers may be too many)
+- [ ] add test mode for `apply`. Just show diff, don't operate truly
+- [ ] * omit some unimportant fields such as `created_at`
+- [ ] * support node version 4 (need more consideration)
 
 ## Relatives
 
