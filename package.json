@@ -1,0 +1,56 @@
+{
+  "name": "kong-config-manager",
+  "version": "1.0.0-rc.1",
+  "description": "A CLI tool who can operate CURD on configs of live Kong instances",
+  "bin": {
+    "kcm": "./bin/kcm.js"
+  },
+  "scripts": {
+    "test": "app=./test/kong-mock-server/index.js && cmd=./node_modules/pm2/bin/pm2 && INIT_DATA=true ${cmd} start ${app} -f && nyc ava && ${cmd} delete ${app}",
+    "coverage": "./node_modules/.bin/nyc report --reporter=text-lcov | ./node_modules/.bin/coveralls"
+  },
+  "ava": {
+    "files": [
+      "test/index.js"
+    ],
+    "source": [
+      "lib/*.js",
+      "enums/*.js",
+      "bin/*.js"
+    ],
+    "failFast": true
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Maples7/kong-config-manager.git"
+  },
+  "preferGlobal": true,
+  "keywords": [
+    "Kong",
+    "config",
+    "CLI"
+  ],
+  "author": "Maples7 <maples7.com>",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/Maples7/kong-config-manager/issues"
+  },
+  "homepage": "https://github.com/Maples7/kong-config-manager#readme",
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "chalk": "^2.0.1",
+    "commander": "^2.11.0",
+    "debug": "^2.6.8",
+    "fs-extra": "^4.0.0",
+    "lodash": "^4.17.4",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.1"
+  },
+  "devDependencies": {
+    "ava": "^0.21.0",
+    "coveralls": "^2.13.1",
+    "nyc": "^11.1.0",
+    "pm2": "^2.6.1",
+    "shelljs": "^0.7.8"
+  }
+}

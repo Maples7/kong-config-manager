@@ -57,3 +57,8 @@ typings/
 # dotenv environment variables file
 .env
 
+# Test directories
+kcm-cli
+main
+kcm-config.json
+sec_test
