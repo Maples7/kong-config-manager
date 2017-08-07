@@ -12,7 +12,7 @@ before_install:
   - cd ../../ 
   - npm link
   - ls -alh
-  - chmod 755 ./
+  - chmod 777 ./test
 after_script:
   - './node_modules/.bin/nyc report --reporter=text-lcov | ./node_modules/.bin/coveralls'
 cache:
