@@ -103,6 +103,8 @@ For example, `kcm-config.json` in the current working directory:
 
 The key would be also used as folder name with all configs of corresponding Kong instance in it, so do **NOT** use any illegal characters for a folder name.
 
+**NOTE**: the protocol like `http` or `https` can NOT be omitted.
+
 ## About Version
 
 This tool are fully tested under version **0.10.x** of Kong, any other versions are NOT guaranteed. Theoretically, once the admin APIs of Kong remain unchanged, this tool would work perfectly. But again, nothing is determined for sure.

@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+  - "6.1"
+before_script:
+  - cd ./test/kong-mock-server && git pull origin master
+after_script:
+  - './node_modules/.bin/nyc report --reporter=text-lcov | ./node_modules/.bin/coveralls'
+cache:
+  directories:
+    - node_modules

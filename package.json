@@ -6,7 +6,8 @@
     "kcm": "./bin/kcm.js"
   },
   "scripts": {
-    "test": "ava"
+    "test": "app=./test/kong-mock-server/index.js && cmd=./node_modules/pm2/bin/pm2 && INIT_DATA=true ${cmd} start ${app} -f && nyc ava && ${cmd} delete ${app}",
+    "coverage": "./node_modules/.bin/nyc report --reporter=text-lcov | ./node_modules/.bin/coveralls"
   },
   "ava": {
     "files": [
@@ -47,6 +48,9 @@
   },
   "devDependencies": {
     "ava": "^0.21.0",
+    "coveralls": "^2.13.1",
+    "nyc": "^11.1.0",
+    "pm2": "^2.6.1",
     "shelljs": "^0.7.8"
   }
 }

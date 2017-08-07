@@ -21,7 +21,6 @@ try {
 let retPromise = null;
 
 if (program.host) {
-  program.instance = program.instance || 'main';
   retPromise = dump(program.host, program.instance);
 } else if (program.file) {
   const configs = getConfigs(program.file);
@@ -32,18 +31,14 @@ if (program.host) {
         console.log(chalk.green(`kong insatnce ${key} finished!`))
       )
     );
-  } else if (program.instance) {
+  } else {
     if (!configs[program.instance]) {
       exit(
         `instance ${program.instance} not found in CLI config file ${program.file}`
       );
     }
     retPromise = dump(configs[program.instance], program.instance);
-  } else {
-    exit('params error');
   }
-} else {
-  exit('params error');
 }
 
 retPromise
