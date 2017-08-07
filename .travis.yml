@@ -1,8 +1,13 @@
 language: node_js
 node_js:
   - "6.1"
-before_script:
-  - cd ./test/kong-mock-server && git pull origin master
+# Handle git submodules yourself
+git:
+    submodules: false
+# Use sed to replace the SSH URL with the public URL, then initialize submodules
+before_install:
+    - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
+    - git submodule update --init --recursive
 after_script:
   - './node_modules/.bin/nyc report --reporter=text-lcov | ./node_modules/.bin/coveralls'
 cache:
