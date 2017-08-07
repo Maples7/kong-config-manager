@@ -3,11 +3,12 @@ node_js:
   - "6.1"
 # Handle git submodules yourself
 git:
-    submodules: false
+  submodules: false
 # Use sed to replace the SSH URL with the public URL, then initialize submodules
 before_install:
-    - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
-    - git submodule update --init --recursive
+  - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
+  - git submodule update --init --recursive
+  - cd ./test/kong-mock-server && npm install --registry=https://registry.npm.taobao.org
 after_script:
   - './node_modules/.bin/nyc report --reporter=text-lcov | ./node_modules/.bin/coveralls'
 cache:
