@@ -1,7 +1,7 @@
 # kong-config-manager
 
 [![Build Status](https://travis-ci.org/Maples7/kong-config-manager.svg?branch=master)](https://travis-ci.org/Maples7/kong-config-manager)
-[![Coverage Status](https://coveralls.io/repos/github/Maples7/kong-config-manager/badge.svg?branch=master)](https://coveralls.io/github/Maples7/kong-config-manager?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/Maples7/kong-config-manager/badge.svg)](https://coveralls.io/github/Maples7/kong-config-manager)
 [![npm version](https://badge.fury.io/js/kong-config-manager.svg)](https://badge.fury.io/js/kong-config-manager)           
 
 [![NPM](https://nodei.co/npm/kong-config-manager.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/kong-config-manager/)
