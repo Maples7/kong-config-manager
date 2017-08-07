@@ -6,13 +6,13 @@ module.exports = function getConfigPath(filePath) {
   const ret = getAbsolutePath(filePath);
 
   if (fs.existsSync(ret)) {
-    try {
-      fs.accessSync(ret, fs.constants.R_OK);
-    } catch (e) {
-      exit(
-        `the program doesn't have READ permission of config file ${filePath}: ${e}`
-      );
-    }
+    // try {
+    //   fs.accessSync(ret, fs.constants.R_OK);
+    // } catch (e) {
+    //   exit(
+    //     `the program doesn't have READ permission of config file ${filePath}: ${e}`
+    //   );
+    // }
 
     return ret;
   } else {
