@@ -36,5 +36,5 @@ if (program.host) {
 }
 
 retPromise
-  .catch(err => exit(`Error: ${err}`))
+  .catch(err => exit(`Error: ${err.stack}`))
   .finally(() => console.log(chalk.green('All Finished!')));

@@ -72,11 +72,18 @@ For example, `kcm-config.json` in the current working directory:
 ```json
 {
   "main": "http://192.168.99.100:8001",
-  "sec_test": "https://localhost:8444"
+  "sec_test": "https://localhost:8444",
+  "third_test": {
+    // `host` is a required field
+    "host": "http://localhost:8001",
+    // specify which objects are your real concerns
+    // this can be used to avoid too many `consumers` here
+    // see ./enums/index.js to get valid objects
+    // `targets` are bound up with `upstreams`, so use `upstreams` rather than `targets`
+    "objects": ["apis", "plugins", "certificates", "snis", "upstreams"]
+  }
 }
 ```
-
-The key would be also used as folder name with all configs of corresponding Kong instance in it, so do **NOT** use any illegal characters for a folder name.
 
 **NOTE**: the protocol like `http` or `https` can NOT be omitted.
 
@@ -132,10 +139,10 @@ Finally, run `npm test`.
 ### TODO
 
 - [x] use more readable field as filename, remember to filenamify
-- [ ] auto-generate a CLI config file template `kcm-config.json` at the beginning
-- [ ] add support for operating on part of objects, not all. (consumers may be too many)
+- [ ] auto-generate a CLI config file template `kcm-config.json` at the beginning or with `kcm init`
+- [x] add support for operating on part of objects, not all. (consumers may be too many)
 - [ ] add test mode for `apply`. Just show diff, don't operate truly
-- [ ] * omit some unimportant fields such as `created_at`
+- [ ] * ~~omit some unimportant fields such as `created_at`~~ NO NEED TO DO THIS
 - [x] * support node version 4 (need more consideration)
 
 ## Relatives

@@ -61,4 +61,4 @@ typings/
 kcm-cli
 main
 kcm-config.json
-sec_test
+sec*test
