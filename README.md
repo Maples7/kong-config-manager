@@ -131,12 +131,12 @@ Finally, run `npm test`.
 
 ### TODO
 
-- [ ] use more readable field as filename, remember to filenamify
+- [x] use more readable field as filename, remember to filenamify
 - [ ] auto-generate a CLI config file template `kcm-config.json` at the beginning
 - [ ] add support for operating on part of objects, not all. (consumers may be too many)
 - [ ] add test mode for `apply`. Just show diff, don't operate truly
 - [ ] * omit some unimportant fields such as `created_at`
-- [ ] * support node version 4 (need more consideration)
+- [x] * support node version 4 (need more consideration)
 
 ## Relatives
 

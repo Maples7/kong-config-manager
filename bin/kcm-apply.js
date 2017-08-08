@@ -1,10 +1,13 @@
 #!/usr/bin/env node
 
+'use strict';
+
 process.env.UV_THREADPOOL_SIZE = 128;
 
 const fs = require('fs');
 const Promise = require('bluebird');
 const chalk = require('chalk');
+const filenameConverter = require('filename-converter');
 const _ = require('lodash');
 const apply = require('../lib/apply');
 const dump = require('../lib/dump');
@@ -18,7 +21,7 @@ const program = makeProgram();
 let retPromise = null;
 
 function initApply(instance, host) {
-  const instancePath = getAbsolutePath(instance);
+  const instancePath = getAbsolutePath(filenameConverter.serialize(instance));
   host = _.trimEnd(host, '/');
   if (fs.existsSync(instancePath)) {
     console.log(chalk.green(`Ready to apply configs for ${instance}...`));

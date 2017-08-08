@@ -1,6 +1,6 @@
 {
   "name": "kong-config-manager",
-  "version": "1.0.0-rc.1",
+  "version": "1.0.0-rc.2",
   "description": "A CLI tool who can operate CURD on configs of live Kong instances",
   "bin": {
     "kcm": "./bin/kcm.js"
@@ -41,6 +41,7 @@
     "chalk": "^2.0.1",
     "commander": "^2.11.0",
     "debug": "^2.6.8",
+    "filename-converter": "^1.0.0",
     "fs-extra": "^4.0.0",
     "lodash": "^4.17.4",
     "request": "^2.81.0",
@@ -53,7 +54,7 @@
     "pm2": "^2.6.1",
     "shelljs": "^0.7.8"
   },
-  "engines" : { 
-    "node" : ">=6.1.0" 
+  "engines": {
+    "node": ">=4.4.0"
   }
 }

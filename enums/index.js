@@ -1,13 +1,15 @@
+'use strict';
+
 module.exports = {
   OBJECTS: ['cluster', 'apis', 'consumers', 'plugins', 'certificates', 'snis', 'upstreams'],
   IDENTIFIRES: {
     cluster: 'name',
-    apis: 'id',
+    apis: 'name',
     consumers: 'id',
-    plugins: 'id',
+    plugins: 'name',
     certificates: 'id',
     snis: 'name',
-    upstreams: 'id',
+    upstreams: 'name',
     targets: 'id'
   },
   REQUEST_TIMEOUT: 1500

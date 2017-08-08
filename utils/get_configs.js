@@ -1,3 +1,5 @@
+'use strict';
+
 const _ = require('lodash');
 const exit = require('./exit');
 const getConfigPath = require('./get_config_path');

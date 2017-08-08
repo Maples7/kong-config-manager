@@ -1,3 +1,5 @@
+'use strict';
+
 const program = require('commander');
 const debug = require('debug')('kcm:make_program');
 const pkg = require('../package.json');
@@ -6,10 +8,7 @@ module.exports = function makeProgram() {
   debug('Start to make a commander instance... Finished!');
   return program
     .version(pkg.version)
-    .option(
-      '-H, --host [value]',
-      'host of admin APIs of kong instance'
-    )
+    .option('-H, --host [value]', 'host of admin APIs of kong instance')
     .option(
       '-f, --file [path]',
       'path of config file for this CLI tool, default to `./kcm-config.json`',
