@@ -1,3 +1,5 @@
+'use strict';
+
 const fs = require('fs');
 const exit = require('./exit');
 const getAbsolutePath = require('./get_absolute_path');
