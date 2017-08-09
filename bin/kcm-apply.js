@@ -15,14 +15,17 @@ const exit = require('../utils/exit');
 const getAbsolutePath = require('../utils/get_absolute_path');
 const getConfigs = require('../utils/get_configs');
 const makeProgram = require('../utils/make_program');
+const validateConfig = require('../utils/validate_config');
 
 const program = makeProgram();
 
 let retPromise = null;
 
-function initApply(instance, host) {
+function initApply(instance, config) {
+  config = validateConfig(config, instance);
+
   const instancePath = getAbsolutePath(filenameConverter.serialize(instance));
-  host = _.trimEnd(host, '/');
+  const host = _.trimEnd(config.host, '/');
   if (fs.existsSync(instancePath)) {
     console.log(chalk.green(`Ready to apply configs for ${instance}...`));
     return apply(instancePath, host).then(() => {
@@ -54,5 +57,5 @@ if (program.host) {
 }
 
 retPromise
-  .catch(err => exit(`Error: ${err}`))
+  .catch(err => exit(`Error: ${err.stack}`))
   .finally(() => console.log(chalk.green('All Finished!')));

@@ -19,15 +19,19 @@ npm i -g kong-config-manager
 
 ### Recommended Workflow
 
-0. `kcm -h`: check the manual
-1. `mkdir kong-config && cd kong-config`: Under your own `src` folder, make a new one to store Kong config. The folder name is arbitrary.
-2. `git init`: make it a git repo
-3. then create a config file for this CLI tool named `kcm-config.json` (other name is also accepted, though it makes following commands a little bit more verbose with a specific customized config file), and fill it with an object about Kong instances and their hosts. **NOTE**: the default instance name is `main`. If there is no `main` here, specify the instance in the following commands with option `-f`.
-4. `kcm dump`: dump config of Kong instance `main` to this repo
-5. If you make any changes over your local configs, make good use of `kcm apply` to apply changes to live Kong instances. Get more details below.
+0. `kcm -h`: check the manual.
+
+1. `kcm init`: the default directory name is `kong-config`, you can use `-d` option to specify one another. In the directory, `kcm-config.json` would be created here as a demo config file. The default instance name is `main`.
+
+2. `kcm dump`: dump config of Kong instance `main` to this repo
+
+3. If you make any changes over your local configs, make good use of `kcm apply` to apply changes to live Kong instances. 
+
+Get more details below.
 
 ### Commands
 
+- `kcm init`: init a git repo and create a demo config file
 - `kcm dump`: dump live Kong configs to your git repo, referring to R(Retrieve) operation
 - `kcm apply`: update Kong configs to live Kong instances, including CUD(Create, Update, Delete) operations
 
@@ -45,13 +49,13 @@ Under any folder which `kcm dump` creates, create a new JSON file with arbitrary
 
 1. Adding **new plugin** should be paid more attention. If you want to add a new plugin under some specific api, use `api_id` field in the new JSON file to achieve it. This field would be used as URL route's param for `POST - /apis/{name or id}/plugins/` API.
 
-2. After success to add items, the JSON files you create manually would be removed.
+2. After successfully adding items, the JSON files you create manually would be removed.
 
 #### Update
 
-Just modify any existing items with the identify field unchanged, then run `kcm apply`.
+Just modify any existing items with the identifying field unchanged, then run `kcm apply`.
 
-**NOTE**: As Kong's Admin APIs' document implies, `/cluster` and `/upstreams/{name or id}/targets` do **NOT** have PATCH or PUT APIs.
+**NOTE**: As Kong's Admin APIs' document implies, `/cluster` and `/upstreams/{name or id}/targets` do **NOT** have PATCH and PUT APIs.
 
 #### Delete
 
@@ -61,7 +65,7 @@ All you need to do is to remove the file of items you want to delete, then run `
 
 **ATTENTION**:
 
-after each `kcm apply`, the tool will exec `dump` automatically to keep your local config is always refreshed and the same with the remote Kong config.
+After each `kcm apply`, the tool will exec `dump` automatically to keep your local config is always refreshed and the same with the remote Kong config.
 
 ### Examples
 
@@ -71,17 +75,33 @@ For example, `kcm-config.json` in the current working directory:
 
 ```json
 {
+  // the value can be a string as `host`
   "main": "http://192.168.99.100:8001",
-  "sec_test": "https://localhost:8444"
+  "sec_test": "https://localhost:8444",
+  // but a plain object is recommended
+  "third_test": {
+    // `host` is a required field
+    "host": "http://localhost:8001",
+    // specify which objects are your real concerns to dump and apply
+    // this can be used to avoid too many `consumers` here
+    // see ./enums/index.js to get valid objects
+    // `targets` are bound up with `upstreams`, so use `upstreams` rather than `targets`
+    "objects": ["apis", "plugins", "certificates", "snis", "upstreams"]
+  }
 }
 ```
-
-The key would be also used as folder name with all configs of corresponding Kong instance in it, so do **NOT** use any illegal characters for a folder name.
 
 **NOTE**: the protocol like `http` or `https` can NOT be omitted.
 
 #### Commands
+
 ```sh
+# init a git repo `kong-config`
+kcm init
+
+# init a git repo `my-kong-config`
+kcm init --dir my-kong-config
+
 # use `kcm-config.json` and dump Kong instance `main` 
 kcm dump
 
@@ -125,17 +145,17 @@ If you want to contribute to this project, feel free to raise any PRs.
 
 Firstly, pull git submodule `kong-mock-server` and install all npm dependencies for test. 
 
-Then, make sure you have installed `kong-config-manager` or run `npm link` in the root directory of this project.
+Then, make sure you have installed CLI tool `kong-config-manager` or run `npm link` in the root directory of this project.
 
 Finally, run `npm test`.
 
 ### TODO
 
 - [x] use more readable field as filename, remember to filenamify
-- [ ] auto-generate a CLI config file template `kcm-config.json` at the beginning
-- [ ] add support for operating on part of objects, not all. (consumers may be too many)
+- [x] auto-generate a CLI config file template `kcm-config.json` at the beginning or with `kcm init`
+- [x] add support for operating on part of objects, not all. (consumers may be too many)
 - [ ] add test mode for `apply`. Just show diff, don't operate truly
-- [ ] * omit some unimportant fields such as `created_at`
+- [ ] * ~~omit some unimportant fields such as `created_at`~~ NO NEED TO DO THIS
 - [x] * support node version 4 (need more consideration)
 
 ## Relatives

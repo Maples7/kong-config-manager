@@ -15,8 +15,102 @@ test.before(t => {
   fse.writeJsonSync(
     './kcm-config.json',
     {
-      main: 'http://localhost:3001',
-      'sec:test': 'http://localhost:3001'
+      main: {
+        host: 'http://localhost:3001'
+      },
+      'sec:test': {
+        host: 'http://localhost:3001'
+      },
+      wrong1: [],
+      wrong2: {
+        host: []
+      },
+      wrong3: {},
+      wrong4: {
+        host: 'str',
+        objects: ['wrongobj']
+      },
+      wrong5: {
+        host: 'str',
+        objects: 'strtoo'
+      }
+    },
+    {
+      spaces: 2
+    }
+  );
+});
+
+test.serial('kcm init', t => {
+  t.plan(2);
+
+  const ret = shell.exec('kcm init');
+  t.is(ret.code, 0);
+
+  const cliConfig = require('./kong-config/kcm-config');
+  t.is(cliConfig.main.host, 'http://localhost:8001');
+
+  shell.rm('-rf', 'kong-config');
+});
+
+test.serial('kcm init -d my-kong-config', t => {
+  t.plan(2);
+
+  const ret = shell.exec('kcm init -d my-kong-config');
+  t.is(ret.code, 0);
+
+  const cliConfig = require('./my-kong-config/kcm-config');
+  t.is(cliConfig.main.host, 'http://localhost:8001');
+
+  shell.rm('-rf', 'my-kong-config');
+});
+
+test.serial('kcm init -d kong-mock-server', t => {
+  t.plan(1);
+
+  const ret = shell.exec('kcm init -d kong-mock-server');
+  t.is(ret.code, 1);
+});
+
+test.serial('kcm dump -i wrong1', t => {
+  t.plan(1);
+  const ret = shell.exec('kcm dump -i wrong1');
+  t.is(ret.code, 1);
+});
+
+test.serial('kcm dump -i wrong2', t => {
+  t.plan(1);
+  const ret = shell.exec('kcm dump -i wrong2');
+  t.is(ret.code, 1);
+});
+
+test.serial('kcm dump -i wrong4', t => {
+  t.plan(1);
+  const ret = shell.exec('kcm dump -i wrong4');
+  t.is(ret.code, 1);
+});
+
+test.serial('kcm dump -i wrong5', t => {
+  t.plan(1);
+  const ret = shell.exec('kcm dump -i wrong5');
+  t.is(ret.code, 1);
+});
+
+test.serial('kcm dump -i wrong3', t => {
+  t.plan(1);
+  const ret = shell.exec('kcm dump -i wrong3');
+  t.is(ret.code, 1);
+
+  fse.writeJsonSync(
+    './kcm-config.json',
+    {
+      main: {
+        host: 'http://localhost:3001'
+      },
+      'sec:test': {
+        host: 'http://localhost:3001',
+        objects: ['apis', 'plugins', 'certificates', 'snis', 'upstreams']
+      }
     },
     {
       spaces: 2
@@ -25,7 +119,7 @@ test.before(t => {
 });
 
 test.serial('DEBUG=kcm:dump kcm dump --all', t => {
-  t.plan(5);
+  t.plan(7);
   const ret = shell.exec('DEBUG=kcm:dump kcm dump --all');
 
   t.is(ret.code, 0);
@@ -37,6 +131,8 @@ test.serial('DEBUG=kcm:dump kcm dump --all', t => {
   const target1 = require('./main/upstreams_service.v1.xyz_targets/4661f55e-95c2-4011-8fd6-c5c56df1c9db.json');
   t.is(target1.id, '4661f55e-95c2-4011-8fd6-c5c56df1c9db');
   t.is(target1.weight, 15);
+  t.true(!fs.existsSync(`./${filenameConverter.serialize('sec:test')}/consumers`));
+  t.true(!fs.existsSync(`./${filenameConverter.serialize('sec:test')}/cluster`));
 });
 
 test.serial('kcm dump --host http://localhost:3001', t => {
@@ -64,7 +160,6 @@ test.serial('kcm dump --file ./kcm-config.json', t => {
 test.serial('kcm dump --instance wrongins', t => {
   t.plan(1);
   const ret = shell.exec('kcm dump --instance wrongins');
-
   t.is(ret.code, 1);
 });
 
