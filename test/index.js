@@ -41,6 +41,37 @@ test.before(t => {
   );
 });
 
+test.serial('kcm init', t => {
+  t.plan(2);
+
+  const ret = shell.exec('kcm init');
+  t.is(ret.code, 0);
+
+  const cliConfig = require('./kong-config/kcm-config');
+  t.is(cliConfig.main.host, 'http://localhost:8001');
+
+  shell.rm('-rf', 'kong-config');
+});
+
+test.serial('kcm init -d my-kong-config', t => {
+  t.plan(2);
+
+  const ret = shell.exec('kcm init -d my-kong-config');
+  t.is(ret.code, 0);
+
+  const cliConfig = require('./my-kong-config/kcm-config');
+  t.is(cliConfig.main.host, 'http://localhost:8001');
+
+  shell.rm('-rf', 'my-kong-config');
+});
+
+test.serial('kcm init -d kong-mock-server', t => {
+  t.plan(1);
+
+  const ret = shell.exec('kcm init -d kong-mock-server');
+  t.is(ret.code, 1);
+});
+
 test.serial('kcm dump -i wrong1', t => {
   t.plan(1);
   const ret = shell.exec('kcm dump -i wrong1');

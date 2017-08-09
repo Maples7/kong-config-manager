@@ -62,3 +62,4 @@ kcm-cli
 main
 kcm-config.json
 sec*test
+kong-config
