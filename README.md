@@ -73,7 +73,7 @@ After each `kcm apply`, the tool will exec `dump` automatically to keep your loc
 
 For example, `kcm-config.json` in the current working directory:
 
-```json
+```js
 {
   // the value can be a string as `host`
   "main": "http://192.168.99.100:8001",
