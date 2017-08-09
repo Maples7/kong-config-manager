@@ -163,7 +163,7 @@ test.serial('kcm dump --instance wrongins', t => {
   t.is(ret.code, 1);
 });
 
-test.serial('DEBUG=kcm:apply kcm apply', t => {
+test.serial('DEBUG=kcm:apply kcm apply --yes', t => {
   t.plan(5);
   // rm a consumer - DELETE
   shell.rm('-rf', './main/consumers/2d324024-8fdb-20a5-g044-62b19db411d1.json');
@@ -177,7 +177,7 @@ test.serial('DEBUG=kcm:apply kcm apply', t => {
   // add a new snis - POST
   fse.writeJsonSync(
     './main/snis/httpbin.com.json',
-    {
+    {  
       name: 'httpbin.com',
       ssl_certificate_id: '16c39eab-49d9-40f9-a55e-c4ee47fada68',
       created_at: 1485531710212
@@ -185,7 +185,7 @@ test.serial('DEBUG=kcm:apply kcm apply', t => {
     { spaces: 2 }
   );
 
-  const ret = shell.exec('DEBUG=kcm:apply kcm apply');
+  const ret = shell.exec('DEBUG=kcm:apply kcm apply --yes');
 
   t.is(ret.code, 0);
   // verify DELETE
@@ -200,12 +200,12 @@ test.serial('DEBUG=kcm:apply kcm apply', t => {
   t.is(snis.length, 3);
 });
 
-test.serial('kcm apply --host http://localhost:3001 --instance main', t => {
+test.serial('kcm apply --host http://localhost:3001 --instance main --yes', t => {
   t.plan(2);
   shell.rm('-rf', './main/plugins/rate-limiting.json');
 
   const ret = shell.exec(
-    'kcm apply --host http://localhost:3001 --instance main'
+    'kcm apply --host http://localhost:3001 --instance main --yes'
   );
 
   t.is(ret.code, 0);
@@ -221,21 +221,21 @@ test.serial('kcm dump --instance sec:test', t => {
 
 // At this point, local configs of `main` and `sec:test` are synced
 
-test.serial('kcm apply --all', t => {
+test.serial('kcm apply --all --yes', t => {
   t.plan(1);
-  const ret = shell.exec('kcm apply --all');
+  const ret = shell.exec('kcm apply --all --yes');
   t.is(ret.code, 0);
 });
 
-test.serial('kcm apply --instance wrongins', t => {
+test.serial('kcm apply -y --instance wrongins', t => {
   t.plan(1);
-  const ret = shell.exec('kcm apply --instance wrongins');
+  const ret = shell.exec('kcm apply -y --instance wrongins');
   t.is(ret.code, 1);
 });
 
-test.serial('kcm apply --instance sec:test', t => {
+test.serial('kcm apply --instance sec:test --yes', t => {
   t.plan(1);
   shell.rm('-rf', `./${filenameConverter.serialize('sec:test')}`);
-  const ret = shell.exec('kcm apply --instance sec:test');
+  const ret = shell.exec('kcm apply --instance sec:test --yes');
   t.is(ret.code, 1);
 });

@@ -9,6 +9,8 @@ const Promise = require('bluebird');
 const chalk = require('chalk');
 const filenameConverter = require('filename-converter');
 const _ = require('lodash');
+const readlineSync = require('readline-sync');
+const shell = require('shelljs');
 const apply = require('../lib/apply');
 const dump = require('../lib/dump');
 const exit = require('../utils/exit');
@@ -17,9 +19,7 @@ const getConfigs = require('../utils/get_configs');
 const makeProgram = require('../utils/make_program');
 const validateConfig = require('../utils/validate_config');
 
-const program = makeProgram();
-
-let retPromise = null;
+const program = makeProgram(true);
 
 function initApply(instance, config) {
   config = validateConfig(config, instance);
@@ -37,6 +37,21 @@ function initApply(instance, config) {
   }
 }
 
+if (!shell.which('git')) {
+  exit('Sorry, this command requires git');
+}
+
+shell.exec('git diff --color');
+console.log();
+if (!program.yes) {
+  if (!readlineSync.keyInYN(chalk.yellow('Confirm change?'))) {
+    console.log();
+    console.log(chalk.green('Okay, see you! :D'));
+    process.exit(0);
+  }
+}
+
+let retPromise = null;
 if (program.host) {
   retPromise = initApply(program.instance, program.host);
 } else if (program.file) {
