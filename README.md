@@ -63,9 +63,11 @@ All you need to do is to remove the file of items you want to delete, then run `
 
 **NOTE**: Be careful about deleting cluster node.
 
-**ATTENTION**:
+**SOMETHING GOOD TO KNOW**:
 
 After each `kcm apply`, the tool will exec `dump` automatically to keep your local config is always refreshed and the same with the remote Kong config.
+
+If you want to review your change before `kcm apply`, you can make good use of `git diff` yourself. Of course, `kcm apply` will ask you to determine changes before applying for real.
 
 ### Examples
 
@@ -149,18 +151,10 @@ Then, make sure you have installed CLI tool `kong-config-manager` or run `npm li
 
 Finally, run `npm test`.
 
-### TODO
-
-- [x] use more readable field as filename, remember to filenamify
-- [x] auto-generate a CLI config file template `kcm-config.json` at the beginning or with `kcm init`
-- [x] add support for operating on part of objects, not all. (consumers may be too many)
-- [ ] add test mode for `apply`. Just show diff, don't operate truly
-- [ ] * ~~omit some unimportant fields such as `created_at`~~ NO NEED TO DO THIS
-- [x] * support node version 4 (need more consideration)
-
 ## Relatives
 
 - [kong-mock-server](https://github.com/Maples7/kong-mock-server)
 
 ## License
+
 [GPLv3](LICENSE)

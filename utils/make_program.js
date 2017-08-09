@@ -4,9 +4,9 @@ const program = require('commander');
 const debug = require('debug')('kcm:make_program');
 const pkg = require('../package.json');
 
-module.exports = function makeProgram() {
-  debug('Start to make a commander instance... Finished!');
-  return program
+module.exports = function makeProgram(hasY) {
+  debug('Start to make a commander instance...');
+  let tmp = program
     .version(pkg.version)
     .option('-H, --host [value]', 'host of admin APIs of kong instance')
     .option(
@@ -22,6 +22,13 @@ module.exports = function makeProgram() {
     .option(
       '-a, --all',
       'whether to operate on all kong instances listed in CLI config file. NOTE: this requires `-f` option rather than `-h`'
-    )
-    .parse(process.argv);
+    );
+  if (hasY) {
+    tmp = tmp.option(
+      '-y, --yes',
+      'whether go on directly while asking for yes or no'
+    );
+  }
+  debug('Finished!');
+  return tmp.parse(process.argv);
 };

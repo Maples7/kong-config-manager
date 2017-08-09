@@ -10,10 +10,9 @@ const dump = require('../lib/dump');
 const getConfigs = require('../utils/get_configs');
 const makeProgram = require('../utils/make_program');
 
-const program = makeProgram();
+const program = makeProgram(false);
 
 let retPromise = null;
-
 if (program.host) {
   retPromise = dump(program.host, program.instance);
 } else if (program.file) {
