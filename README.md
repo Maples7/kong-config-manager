@@ -23,9 +23,11 @@ npm i -g kong-config-manager
 
 1. `kcm init`: the default directory name is `kong-config`, you can use `-d` option to specify one another. In the directory, `kcm-config.json` would be created here as a demo config file. The default instance name is `main`.
 
-2. `kcm dump`: dump config of Kong instance `main` to this repo
+2. `cd kong-config`: enter the git repo, the dir name should stay the same with step 1.
 
-3. If you make any changes over your local configs, make good use of `kcm apply` to apply changes to live Kong instances. 
+3. `kcm dump`: dump config of Kong instance `main` to this repo.
+
+4. If you make any changes over your local configs, make good use of `kcm apply` to apply changes to live Kong instances. 
 
 Get more details below.
 
