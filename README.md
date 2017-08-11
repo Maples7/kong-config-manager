@@ -137,6 +137,10 @@ kcm apply --instance sec_test
 kcm apply --host https://localhost:8444 --instance sec_test
 ```
 
+## Debug
+
+Add `DEBUG=kcm:*` before any commands to see more debug information, e.g. `DEBUG=kcm:* kcm apply`.
+
 ## About Version
 
 This tool are fully tested under version **0.10.x** of Kong, any other versions are NOT guaranteed. Theoretically, once the admin APIs of Kong remain unchanged, this tool would work perfectly. But again, nothing is determined for sure.
