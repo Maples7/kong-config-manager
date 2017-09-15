@@ -131,8 +131,12 @@ test.serial('DEBUG=kcm:dump kcm dump --all', t => {
   const target1 = require('./main/upstreams_service.v1.xyz_targets/4661f55e-95c2-4011-8fd6-c5c56df1c9db.json');
   t.is(target1.id, '4661f55e-95c2-4011-8fd6-c5c56df1c9db');
   t.is(target1.weight, 15);
-  t.true(!fs.existsSync(`./${filenameConverter.serialize('sec:test')}/consumers`));
-  t.true(!fs.existsSync(`./${filenameConverter.serialize('sec:test')}/cluster`));
+  t.true(
+    !fs.existsSync(`./${filenameConverter.serialize('sec:test')}/consumers`)
+  );
+  t.true(
+    !fs.existsSync(`./${filenameConverter.serialize('sec:test')}/cluster`)
+  );
 });
 
 test.serial('kcm dump --host http://localhost:3001', t => {
@@ -177,7 +181,7 @@ test.serial('DEBUG=kcm:apply kcm apply --yes', t => {
   // add a new snis - POST
   fse.writeJsonSync(
     './main/snis/httpbin.com.json',
-    {  
+    {
       name: 'httpbin.com',
       ssl_certificate_id: '16c39eab-49d9-40f9-a55e-c4ee47fada68',
       created_at: 1485531710212
@@ -200,18 +204,21 @@ test.serial('DEBUG=kcm:apply kcm apply --yes', t => {
   t.is(snis.length, 3);
 });
 
-test.serial('kcm apply --host http://localhost:3001 --instance main --yes', t => {
-  t.plan(2);
-  shell.rm('-rf', './main/plugins/rate-limiting.json');
+test.serial(
+  'kcm apply --host http://localhost:3001 --instance main --yes',
+  t => {
+    t.plan(2);
+    shell.rm('-rf', './main/plugins/rate-limiting.json');
 
-  const ret = shell.exec(
-    'kcm apply --host http://localhost:3001 --instance main --yes'
-  );
+    const ret = shell.exec(
+      'kcm apply --host http://localhost:3001 --instance main --yes'
+    );
 
-  t.is(ret.code, 0);
-  const plugins = fs.readdirSync('./main/plugins');
-  t.is(plugins.length, 1);
-});
+    t.is(ret.code, 0);
+    const plugins = fs.readdirSync('./main/plugins');
+    t.is(plugins.length, 1);
+  }
+);
 
 test.serial('kcm dump --instance sec:test', t => {
   t.plan(1);
@@ -238,4 +245,13 @@ test.serial('kcm apply --instance sec:test --yes', t => {
   shell.rm('-rf', `./${filenameConverter.serialize('sec:test')}`);
   const ret = shell.exec('kcm apply --instance sec:test --yes');
   t.is(ret.code, 1);
+});
+
+test.serial('404 when upstream does not exist operating some target', t => {
+  t.plan(1);
+  const dir = './main/upstreams_404lalala_targets';
+  shell.mkdir('-p', dir);
+  const ret = shell.exec('kcm apply --yes');
+  t.is(ret.code, 1);
+  shell.rm('-rf', dir);
 });
