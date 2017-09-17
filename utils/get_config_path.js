@@ -1,7 +1,7 @@
 'use strict';
 
 const fs = require('fs');
-const exit = require('./exit');
+const logger = require('./logger');
 const getAbsolutePath = require('./get_absolute_path');
 
 module.exports = function getConfigPath(filePath) {
@@ -10,6 +10,6 @@ module.exports = function getConfigPath(filePath) {
   if (fs.existsSync(ret)) {
     return ret;
   } else {
-    exit(`config file ${filePath} is NOT found`);
+    logger.error(`config file ${filePath} is NOT found`);
   }
 };

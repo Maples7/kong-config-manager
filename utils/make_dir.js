@@ -3,7 +3,7 @@
 const fse = require('fs-extra');
 const path = require('path');
 const debug = require('debug')('kcm:make_dir');
-const exit = require('./exit');
+const logger = require('./logger');
 
 module.exports = function makeDir(dirName) {
   debug(`Ready to make dir ${dirName}...`);
@@ -13,7 +13,7 @@ module.exports = function makeDir(dirName) {
     fse.removeSync(dirPath);
     fse.ensureDirSync(dirPath);
   } catch (e) {
-    exit(`Fail to make dir ${dirName}: ${e}`);
+    logger.error(`Fail to make dir ${dirName}: ${e}`);
   }
   debug(`mkdir ${dirName} finished!`);
 };
