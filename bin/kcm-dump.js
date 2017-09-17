@@ -5,10 +5,14 @@
 const fs = require('fs');
 const Promise = require('bluebird');
 const chalk = require('chalk');
-const exit = require('../utils/exit');
 const dump = require('../lib/dump');
 const getConfigs = require('../utils/get_configs');
+const logger = require('../utils/logger');
 const makeProgram = require('../utils/make_program');
+
+Promise.config({
+  longStackTraces: true
+});
 
 const program = makeProgram(false);
 
@@ -21,12 +25,12 @@ if (program.host) {
   if (program.all) {
     retPromise = Promise.map(Object.keys(configs), key =>
       dump(configs[key], key).tap(() =>
-        console.log(chalk.green(`kong insatnce ${key} finished!`))
+        logger.info(`kong insatnce ${key} finished!`)
       )
     );
   } else {
     if (!configs[program.instance]) {
-      exit(
+      logger.error(
         `instance ${program.instance} not found in CLI config file ${program.file}`
       );
     }
@@ -35,5 +39,5 @@ if (program.host) {
 }
 
 retPromise
-  .catch(err => exit(`Error: ${err.stack}`))
-  .finally(() => console.log(chalk.green('All Finished!')));
+  .catch(err => logger.error(`Error: ${err.stack}`))
+  .finally(() => logger.info('All Finished!'));

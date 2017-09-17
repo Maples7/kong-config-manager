@@ -13,11 +13,15 @@ const readlineSync = require('readline-sync');
 const shell = require('shelljs');
 const apply = require('../lib/apply');
 const dump = require('../lib/dump');
-const exit = require('../utils/exit');
 const getAbsolutePath = require('../utils/get_absolute_path');
 const getConfigs = require('../utils/get_configs');
+const logger = require('../utils/logger');
 const makeProgram = require('../utils/make_program');
 const validateConfig = require('../utils/validate_config');
+
+Promise.config({
+  longStackTraces: true
+});
 
 const program = makeProgram(true);
 
@@ -27,18 +31,18 @@ function initApply(instance, config) {
   const instancePath = getAbsolutePath(filenameConverter.serialize(instance));
   const host = _.trimEnd(config.host, '/');
   if (fs.existsSync(instancePath)) {
-    console.log(chalk.green(`Ready to apply configs for ${instance}...`));
+    logger.info(`Ready to apply configs for ${instance}...`);
     return apply(instancePath, host).then(() => {
-      console.log(chalk.green(`Success to apply configs for ${instance}!`));
-      return dump(host, instance);
+      logger.info(`Success to apply configs for ${instance}!`);
+      return dump(config, instance);
     });
   } else {
-    exit(`dir ./${instance} does NOT exist for instance ${instance}`);
+    logger.error(`dir ./${instance} does NOT exist for instance ${instance}`);
   }
 }
 
 if (!shell.which('git')) {
-  exit('Sorry, this command requires git');
+  logger.error('Sorry, this command requires git');
 }
 
 shell.exec('git diff --color');
@@ -46,7 +50,7 @@ console.log();
 if (!program.yes) {
   if (!readlineSync.keyInYN(chalk.yellow('Confirm change?'))) {
     console.log();
-    console.log(chalk.green('Okay, see you! :D'));
+    logger.info('Okay, see you! :D');
     process.exit(0);
   }
 }
@@ -63,7 +67,7 @@ if (program.host) {
     );
   } else {
     if (!configs[program.instance]) {
-      exit(
+      logger.error(
         `instance ${program.instance} not found in CLI config file ${program.file}`
       );
     }
@@ -72,5 +76,5 @@ if (program.host) {
 }
 
 retPromise
-  .catch(err => exit(`Error: ${err.stack}`))
-  .finally(() => console.log(chalk.green('All Finished!')));
+  .catch(err => logger.error(`Error: ${err.stack}`))
+  .finally(() => logger.info('All Finished!'));
