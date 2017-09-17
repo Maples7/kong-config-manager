@@ -3,16 +3,16 @@
 const fs = require('fs');
 const test = require('ava');
 const filenameConverter = require('filename-converter');
-const fse = require('fs-extra');
 const rp = require('request-promise');
 const shell = require('shelljs');
 const db = require('./kong-mock-server/lib/db');
+const writeJsonSync = require('../utils/write_json_sync');
 
 test.before(t => {
   // wait initial data finished
   shell.exec('sleep 1');
   shell.cd('test');
-  fse.writeJsonSync(
+  writeJsonSync(
     './kcm-config.json',
     {
       main: {
@@ -101,7 +101,7 @@ test.serial('kcm dump -i wrong3', t => {
   const ret = shell.exec('kcm dump -i wrong3');
   t.is(ret.code, 1);
 
-  fse.writeJsonSync(
+  writeJsonSync(
     './kcm-config.json',
     {
       main: {
@@ -176,10 +176,10 @@ test.serial('DEBUG=kcm:apply kcm apply --yes', t => {
   const plugin1Path = './main/plugins/halo-auth.json';
   const plugin1 = require(plugin1Path);
   plugin1.enabled = false;
-  fse.writeJsonSync(plugin1Path, plugin1, { spaces: 2 });
+  writeJsonSync(plugin1Path, plugin1, { spaces: 2 });
 
   // add a new snis - POST
-  fse.writeJsonSync(
+  writeJsonSync(
     './main/snis/httpbin.com.json',
     {
       name: 'httpbin.com',

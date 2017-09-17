@@ -10,6 +10,7 @@ const shell = require('shelljs');
 const pkg = require('../package.json');
 const exit = require('../utils/exit');
 const makeDir = require('../utils/make_dir');
+const writeJsonSync = require('../utils/write_json_sync');
 
 if (!shell.which('git')) {
   exit('Sorry, this command requires git');
@@ -38,7 +39,7 @@ if (shell.exec('git init').code !== 0) {
 }
 
 try {
-  fse.writeJsonSync(
+  writeJsonSync(
     'kcm-config.json',
     {
       main: {
