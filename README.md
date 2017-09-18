@@ -145,9 +145,9 @@ This tool are tested under version **0.10.x** and **0.11.x** of Kong, any other 
 
 [`cluster` endpoint has disappeared since 0.11.x of Kong](https://github.com/Mashape/kong/blob/master/CHANGELOG.md#admin-api), and this tool would make it unpainful by getting the version of your Kong instance firstly. 
 
-However, the admin APIs might also have slight changes between 2 consistent small versions. In this situation, this tool would raise a WARNING with yellow color since v1.2.0 without exiting with error directly. Therefore, if you find there are any warnings about non-2xx response (404 in most cases) and know that's because your own Kong instance is not compatiable with this tool, you could just ignore the warnings. You can take advantage of `objects` field in `kcm-config.json` to make these annoying warnings slient by not tracking some objects such as `cluster`.
+However, the admin APIs might also have slight changes between 2 consistent small versions. In this situation, this tool would raise a WARNING with yellow color since v1.2.0 without exiting with error directly. Therefore, if you find there are any warnings about non-2xx response (404 in most cases) and know that's because your own Kong instance is not compatible with this tool, you could just ignore the warnings. You can take advantage of `objects` field in `kcm-config.json` to make these annoying warnings slient by not tracking some objects such as `cluster`.
 
-Also, you are welcome to raise issues or even PRs to make it more compatiable.
+Also, you are welcome to raise issues or even PRs to make it more compatible.
 
 ## Contribution
 
