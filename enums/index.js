@@ -1,7 +1,10 @@
 'use strict';
 
 module.exports = {
-  OBJECTS: ['cluster', 'apis', 'consumers', 'plugins', 'certificates', 'snis', 'upstreams'],
+  OBJECTS: {
+    '0.10.x': ['cluster', 'apis', 'consumers', 'plugins', 'certificates', 'snis', 'upstreams'],
+    '0.11.x': ['apis', 'consumers', 'plugins', 'certificates', 'snis', 'upstreams']
+  },
   IDENTIFIRES: {
     cluster: 'name',
     apis: 'name',
