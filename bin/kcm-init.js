@@ -39,17 +39,11 @@ if (shell.exec('git init').code !== 0) {
 }
 
 try {
-  writeJsonSync(
-    'kcm-config.json',
-    {
-      main: {
-        host: 'http://localhost:8001'
-      }
-    },
-    {
-      spaces: 2
+  writeJsonSync('kcm-config.json', {
+    main: {
+      host: 'http://localhost:8001'
     }
-  );
+  });
 } catch (e) {
   logger.error(`fail to create demo config file: ${e}`);
 }

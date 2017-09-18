@@ -47,11 +47,9 @@ Under any folder which `kcm dump` creates, create a new JSON file with arbitrary
 
 **NOTE**:
 
-0. As Kong's Admin APIs' document implies, `/cluster` has **NO** POST API.
+0. Adding **new plugin** should be paid more attention. If you want to add a new plugin under some specific api, use `api_id` field in the new JSON file to achieve it. This field would be used as URL route's param for `POST - /apis/{name or id}/plugins/` API.
 
-1. Adding **new plugin** should be paid more attention. If you want to add a new plugin under some specific api, use `api_id` field in the new JSON file to achieve it. This field would be used as URL route's param for `POST - /apis/{name or id}/plugins/` API.
-
-2. After successfully adding items, the JSON files you create manually would be removed.
+1. After successfully adding items, the JSON files you create manually would be removed.
 
 #### Update
 
@@ -63,7 +61,7 @@ Just modify any existing items with the identifying field unchanged, then run `k
 
 All you need to do is to remove the file of items you want to delete, then run `kcm apply`.
 
-**NOTE**: Be careful about deleting cluster node.
+**NOTE**: Be VERY careful about deleting cluster node.
 
 **SOMETHING GOOD TO KNOW**:
 
