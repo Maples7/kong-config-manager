@@ -12,7 +12,7 @@ test.before(t => {
   // wait initial data finished
   shell.exec('sleep 1');
   shell.cd('test');
-  shell.rm('-rf', 'kong-config')
+  shell.rm('-rf', 'kong-config');
   writeJsonSync(
     './kcm-config.json',
     {
@@ -97,6 +97,30 @@ test.serial('kcm dump -i wrong5', t => {
   t.is(ret.code, 1);
 });
 
+test.serial('v0.11.x should has no cluster endpoint', t => {
+  t.plan(1);
+
+  writeJsonSync('./kcm-config.json', {
+    main: {
+      host: 'http://localhost:3001'
+    },
+    'sec:test': {
+      host: 'http://localhost:3001',
+      objects: [
+        'cluster',
+        'apis',
+        'plugins',
+        'certificates',
+        'snis',
+        'upstreams'
+      ]
+    }
+  });
+  const ret = shell.exec('kcm dump -i sec:test');
+
+  t.is(ret.code, 1);
+});
+
 test.serial('kcm dump -i wrong3', t => {
   t.plan(1);
   const ret = shell.exec('kcm dump -i wrong3');
@@ -155,11 +179,11 @@ test.serial('kcm dump --file ./kcm-config.json', t => {
   const ret = shell.exec('kcm dump --file ./kcm-config.json');
 
   t.is(ret.code, 0);
-  const cluster = require(`./main/cluster/${filenameConverter.serialize(
-    '3b42de4b1a43_0.0.0.0@0047946_5b0f4afcfe4e45c6b5d40cef6a256311.json'
+  const object = require(`./main/snis/${filenameConverter.serialize(
+    'example.com.json'
   )}`);
-  t.is(cluster.status, 'alive');
-  t.is(cluster.address, '172.30.0.5:7946');
+  t.is(object.name, 'example.com');
+  t.is(object.ssl_certificate_id, '34c49eab-09d9-40f9-a55e-c4ee47fada68');
 });
 
 test.serial('kcm dump --instance wrongins', t => {

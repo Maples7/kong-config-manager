@@ -86,7 +86,7 @@ For example, `kcm-config.json` in the current working directory:
     "host": "http://localhost:8001",
     // specify which objects are your real concerns to dump and apply
     // this can be used to avoid too many `consumers` here
-    // see ./enums/index.js to get valid objects
+    // see ./enums/index.js to get valid objects with corresponding Kong's version
     // `targets` are bound up with `upstreams`, so use `upstreams` rather than `targets`
     "objects": ["apis", "plugins", "certificates", "snis", "upstreams"]
   }
@@ -141,7 +141,13 @@ Add `DEBUG=kcm:*` before any commands to see more debug information, e.g. `DEBUG
 
 ## About Version
 
-This tool are fully tested under version **0.10.x** of Kong, any other versions are NOT guaranteed. Theoretically, once the admin APIs of Kong remain unchanged, this tool would work perfectly. But again, nothing is determined for sure.
+This tool are tested under version **0.10.x** and **0.11.x** of Kong, any other versions are NOT guaranteed. Theoretically, once the admin APIs of Kong remain unchanged, this tool would work perfectly. But again, nothing is determined for sure.
+
+[`cluster` endpoint has disappeared since 0.11.x of Kong](https://github.com/Mashape/kong/blob/master/CHANGELOG.md#admin-api), and this tool would make it unpainful by getting the version of your Kong instance firstly. 
+
+However, the admin APIs might also have slight changes between 2 consistent small versions. In this situation, this tool would raise a WARNING with yellow color since v1.2.0 without exiting with error directly. Therefore, if you find there are any warnings about non-2xx response (404 in most cases) and know that's because your own Kong instance is not compatiable with this tool, you could just ignore the warnings. You can take advantage of `objects` field in `kcm-config.json` to make these annoying warnings slient by not tracking some objects such as `cluster`.
+
+Also, you are welcome to raise issues or even PRs to make it more compatiable.
 
 ## Contribution
 
