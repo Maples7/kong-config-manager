@@ -16,12 +16,12 @@ module.exports = function makeProgram(hasY) {
     )
     .option(
       '-i, --instance [name]',
-      'when you have many kong instances to manage, specify a name, default to `main`. NOTE: this requires `-f` option rather than `-h`',
+      'when you have many kong instances to manage, specify a name, default to `main`. NOTE: this requires `--file` option rather than `--host`',
       'main'
     )
     .option(
       '-a, --all',
-      'whether to operate on all kong instances listed in CLI config file. NOTE: this requires `-f` option rather than `-h`'
+      'whether to operate on all kong instances listed in CLI config file. NOTE: this requires `--file` option rather than `--host`'
     );
   if (hasY) {
     tmp = tmp.option(
