@@ -12,6 +12,7 @@ test.before(t => {
   // wait initial data finished
   shell.exec('sleep 1');
   shell.cd('test');
+  shell.rm('-rf', 'kong-config')
   writeJsonSync(
     './kcm-config.json',
     {
@@ -155,10 +156,10 @@ test.serial('kcm dump --file ./kcm-config.json', t => {
 
   t.is(ret.code, 0);
   const cluster = require(`./main/cluster/${filenameConverter.serialize(
-    '064f9f98619d_0.0.0.0:7946_d5593e0d422840519b0ec828a73af045.json'
+    '3b42de4b1a43_0.0.0.0@0047946_5b0f4afcfe4e45c6b5d40cef6a256311.json'
   )}`);
   t.is(cluster.status, 'alive');
-  t.is(cluster.address, '1.2.3.4:7946');
+  t.is(cluster.address, '172.30.0.5:7946');
 });
 
 test.serial('kcm dump --instance wrongins', t => {
