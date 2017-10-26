@@ -7,7 +7,7 @@
 [![NPM](https://nodei.co/npm/kong-config-manager.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/kong-config-manager/)
 [![NPM](https://nodei.co/npm-dl/kong-config-manager.png?months=6&height=3)](https://nodei.co/npm/kong-config-manager/)
 
-Yet another Kong CLI tool who can operate CURD on configs of dozens of live [Kong](https://getkong.org/) instances. In this way, the config of Kong can be version-controlled and rollback with the help of git.
+Yet another Kong CLI tool who can operate CURD on configurations of dozens of live [Kong](https://getkong.org/) instances. In this way, the configuration of Kong can be version-controlled and rollback with the help of git.
 
 ## Usage
 
@@ -21,25 +21,25 @@ npm i -g kong-config-manager
 
 0. `kcm -h`: check the manual.
 
-1. `kcm init`: the default directory name is `kong-config`, you can use `-d` option to specify one another. In the directory, `kcm-config.json` would be created here as a demo config file. The default instance name is `main`.
+1. `kcm init`: the default directory name is `kong-config`, you can use `-d` option to specify one another. In the directory, `kcm-config.json` would be created here as a demo of CLI configuration file. The default instance name is `main`.
 
 2. `cd kong-config`: enter the git repo, the dir name should stay the same with step 1.
 
-3. `kcm dump`: dump config of Kong instance `main` to this repo.
+3. `kcm dump`: dump configurations of Kong instance `main` to this repo.
 
-4. If you make any changes over your local configs, make good use of `kcm apply` to apply changes to live Kong instances. 
+4. If you make any changes over your local configurations, make good use of `kcm apply` to apply changes to live Kong instances. 
 
 Get more details below.
 
 ### Commands
 
-- `kcm init`: init a git repo and create a demo config file
-- `kcm dump`: dump live Kong configs to your git repo, referring to R(Retrieve) operation
-- `kcm apply`: update Kong configs to live Kong instances, including CUD(Create, Update, Delete) operations
+- `kcm init`: init a git repo and create a demo of CLI configuration file
+- `kcm dump`: dump live Kong configurations to your git repo, referring to R(Retrieve) operation
+- `kcm apply`: update Kong configurations to live Kong instances, including CUD(Create, Update, Delete) operations
 
 Run `kcm [command] -h` to check the manual for details.
 
-### How to make changes over local configs
+### How to make changes over local configurations
 
 #### Create
 
@@ -65,13 +65,13 @@ All you need to do is to remove the file of items you want to delete, then run `
 
 **SOMETHING GOOD TO KNOW**:
 
-After each `kcm apply`, the tool will exec `dump` automatically to keep your local config is always refreshed and the same with the remote Kong config.
+After each `kcm apply`, the tool will exec `dump` automatically to keep your local configuration is always refreshed and the same with the remote Kong configuration.
 
 If you want to review your change before `kcm apply`, you can make good use of `git diff` yourself. Of course, `kcm apply` will ask you to determine changes before applying for real.
 
 ### Examples
 
-#### CLI config file
+#### CLI configuration file
 
 For example, `kcm-config.json` in the current working directory:
 
@@ -110,28 +110,28 @@ kcm dump
 # use `kcm-config.json` and dump all instances listed in it
 kcm dump --all
 
-# use `https://localhost:8444` as host and store configs in `main` folder
+# use `https://localhost:8444` as host and store configurations in `main` folder
 kcm dump --host https://localhost:8444
 
 # use `kcm-config.json` and dump Kong instance `sec_test` 
 kcm dump --instance sec_test
 
-# use `https://localhost:8444` as host and store configs in `sec_test` folder
+# use `https://localhost:8444` as host and store configurations in `sec_test` folder
 kcm dump --host https://localhost:8444 --instance sec_test
 
-# use `kcm-config.json` and apply configs of Kong instance `main` 
+# use `kcm-config.json` and apply configurations of Kong instance `main` 
 kcm apply
 
-# use `kcm-config.json` and apply configs of all Kong instances concurrently
+# use `kcm-config.json` and apply configurations of all Kong instances concurrently
 kcm apply --all
 
-# use `https://localhost:8444` as host and apply configs in `main` folder
+# use `https://localhost:8444` as host and apply configurations in `main` folder
 kcm apply --host https://localhost:8444
 
-# use `kcm-config.json` to find corresponding host and apply configs in `sec_test` folder
+# use `kcm-config.json` to find corresponding host and apply configurations in `sec_test` folder
 kcm apply --instance sec_test
 
-# use `https://localhost:8444` as host and apply configs in `sec_test` folder
+# use `https://localhost:8444` as host and apply configurations in `sec_test` folder
 kcm apply --host https://localhost:8444 --instance sec_test
 ```
 
