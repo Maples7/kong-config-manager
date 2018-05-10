@@ -9,7 +9,7 @@ module.exports = {
     cluster: 'name',
     apis: 'name',
     consumers: 'id',
-    plugins: 'name',
+    plugins: 'id',
     certificates: 'id',
     snis: 'name',
     upstreams: 'name',

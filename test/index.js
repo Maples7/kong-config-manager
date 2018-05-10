@@ -169,7 +169,7 @@ test.serial('kcm dump --host http://localhost:3001', t => {
   const ret = shell.exec('kcm dump --host http://localhost:3001');
 
   t.is(ret.code, 0);
-  const plugin1 = require('./main/plugins/halo-auth.json');
+  const plugin1 = require('./main/plugins/3d324d84-1sdb-30a5-c043-63b19db421d1.json');
   t.is(plugin1.name, 'halo-auth');
   t.is(plugin1.enabled, true);
 });
@@ -198,7 +198,7 @@ test.serial('DEBUG=kcm:apply kcm apply --yes', t => {
   shell.rm('-rf', './main/consumers/2d324024-8fdb-20a5-g044-62b19db411d1.json');
 
   // disable a plugin - PATCH
-  const plugin1Path = './main/plugins/halo-auth.json';
+  const plugin1Path = './main/plugins/3d324d84-1sdb-30a5-c043-63b19db421d1.json';
   const plugin1 = require(plugin1Path);
   plugin1.enabled = false;
   writeJsonSync(plugin1Path, plugin1, { spaces: 2 });
@@ -233,7 +233,7 @@ test.serial(
   'kcm apply --host http://localhost:3001 --instance main --yes',
   t => {
     t.plan(2);
-    shell.rm('-rf', './main/plugins/rate-limiting.json');
+    shell.rm('-rf', './main/plugins/4d924084-1adb-40a5-c042-63b19db421d1.json');
 
     const ret = shell.exec(
       'kcm apply --host http://localhost:3001 --instance main --yes'
