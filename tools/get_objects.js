@@ -7,8 +7,11 @@ const ENUMS = require('../enums');
 module.exports = function getObjects(url) {
   return rp(url).then(body => {
     const res = JSON.parse(body);
-    return semver.gte(res.version, '0.11.0')
-      ? ENUMS.OBJECTS['0.11.x']
+    const version = res.version;
+    return semver.gte(version, '0.11.0')
+      ? semver.gte(version, '0.13.0')
+        ? ENUMS.OBJECTS['0.13.x']
+        : ENUMS.OBJECTS['0.11.x']
       : ENUMS.OBJECTS['0.10.x'];
   });
 };
