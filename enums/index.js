@@ -48,7 +48,7 @@ module.exports = {
     snis: 'name',
     upstreams: 'name',
     targets: 'id',
-    services: 'name',
+    services: 'id',
     routes: 'id'
   },
   REQUEST_TIMEOUT: 1500

@@ -2,10 +2,9 @@
 
 [![Build Status](https://travis-ci.org/Maples7/kong-config-manager.svg?branch=master)](https://travis-ci.org/Maples7/kong-config-manager)
 [![Coverage Status](https://coveralls.io/repos/github/Maples7/kong-config-manager/badge.svg)](https://coveralls.io/github/Maples7/kong-config-manager)
-[![npm version](https://badge.fury.io/js/kong-config-manager.svg)](https://badge.fury.io/js/kong-config-manager)           
+[![npm version](https://badge.fury.io/js/kong-config-manager.svg)](https://badge.fury.io/js/kong-config-manager)
 
 [![NPM](https://nodei.co/npm/kong-config-manager.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/kong-config-manager/)
-[![NPM](https://nodei.co/npm-dl/kong-config-manager.png?months=6&height=3)](https://nodei.co/npm/kong-config-manager/)
 
 Yet another Kong CLI tool who can operate CURD on configurations of dozens of live [Kong](https://getkong.org/) instances. In this way, the configuration of Kong can be version-controlled and rollback with the help of git.
 
@@ -19,15 +18,15 @@ npm i -g kong-config-manager
 
 ### Recommended Workflow
 
-0. `kcm -h`: check the manual.
+1. `kcm -h`: check the manual.
 
-1. `kcm init`: the default directory name is `kong-config`, you can use `-d` option to specify one another. In the directory, `kcm-config.json` would be created here as a demo of CLI configuration file. The default instance name is `main`.
+2. `kcm init`: the default directory name is `kong-config`, you can use `-d` option to specify one another. In the directory, `kcm-config.json` would be created here as a demo of CLI configuration file. The default instance name is `main`.
 
-2. `cd kong-config`: enter the git repo, the dir name should stay the same with step 1.
+3. `cd kong-config`: enter the git repo, the dir name should stay the same with step 1.
 
-3. `kcm dump`: dump configurations of Kong instance `main` to this repo.
+4. `kcm dump`: dump configurations of Kong instance `main` to this repo.
 
-4. If you make any changes over your local configurations, make good use of `kcm apply` to apply changes to live Kong instances. 
+5. If you make any changes over your local configurations, make good use of `kcm apply` to apply changes to live Kong instances.
 
 Get more details below.
 
@@ -47,9 +46,9 @@ Under any folder which `kcm dump` creates, create a new JSON file with arbitrary
 
 **NOTE**:
 
-0. Adding **new plugin** should be paid more attention. If you want to add a new plugin under some specific api, use `api_id` field in the new JSON file to achieve it. This field would be used as URL route's param for `POST - /apis/{name or id}/plugins/` API.
+1. Adding **new plugin** should be paid more attention. If you want to add a new plugin under some specific api, use `api_id` field in the new JSON file to achieve it. This field would be used as URL route's param for `POST - /apis/{name or id}/plugins/` API.
 
-1. After successfully adding items, the JSON files you create manually would be removed.
+2. After successfully adding items, the JSON files you create manually would be removed.
 
 #### Update
 
@@ -95,7 +94,7 @@ For example, `kcm-config.json` in the current working directory:
 
 **NOTE**: the protocol like `http` or `https` can NOT be omitted.
 
-#### Commands
+#### Commands Examples
 
 ```sh
 # init a git repo `kong-config`
@@ -104,7 +103,7 @@ kcm init
 # init a git repo `my-kong-config`
 kcm init --dir my-kong-config
 
-# use `kcm-config.json` and dump Kong instance `main` 
+# use `kcm-config.json` and dump Kong instance `main`
 kcm dump
 
 # use `kcm-config.json` and dump all instances listed in it
@@ -113,13 +112,13 @@ kcm dump --all
 # use `https://localhost:8444` as host and store configurations in `main` folder
 kcm dump --host https://localhost:8444
 
-# use `kcm-config.json` and dump Kong instance `sec_test` 
+# use `kcm-config.json` and dump Kong instance `sec_test`
 kcm dump --instance sec_test
 
 # use `https://localhost:8444` as host and store configurations in `sec_test` folder
 kcm dump --host https://localhost:8444 --instance sec_test
 
-# use `kcm-config.json` and apply configurations of Kong instance `main` 
+# use `kcm-config.json` and apply configurations of Kong instance `main`
 kcm apply
 
 # use `kcm-config.json` and apply configurations of all Kong instances concurrently
@@ -141,9 +140,9 @@ Add `DEBUG=kcm:*` before any commands to see more debug information, e.g. `DEBUG
 
 ## About Version
 
-This tool are tested under version **0.10.x** and **0.11.x** of Kong, any other versions are NOT guaranteed. Theoretically, once the admin APIs of Kong remain unchanged, this tool would work perfectly. But again, nothing is determined for sure.
+This tool are tested under version **0.10.x** and **0.11.x** of Kong and adjusted to be compatible with other above versions, though any other versions are NOT guaranteed. Theoretically, once the admin APIs of Kong remain unchanged, this tool would work perfectly. But again, nothing is determined for sure.
 
-[`cluster` endpoint has disappeared since 0.11.x of Kong](https://github.com/Mashape/kong/blob/master/CHANGELOG.md#admin-api), and this tool would make it unpainful by getting the version of your Kong instance firstly. 
+[`cluster` endpoint has disappeared since 0.11.x of Kong](https://github.com/Mashape/kong/blob/master/CHANGELOG.md#admin-api), and this tool would make it unpainful by getting the version of your Kong instance firstly.
 
 However, the admin APIs might also have slight changes between 2 consistent small versions. In this situation, this tool would raise a WARNING with yellow color since v1.2.0 without exiting with error directly. Therefore, if you find there are any warnings about non-2xx response (404 in most cases) and know that's because your own Kong instance is not compatible with this tool, you could just ignore the warnings. You can take advantage of `objects` field in `kcm-config.json` to make these annoying warnings slient by not tracking some objects such as `cluster`.
 
@@ -155,7 +154,7 @@ If you want to contribute to this project, feel free to raise any PRs.
 
 ### Test
 
-Firstly, pull git submodule `kong-mock-server` and install all npm dependencies for test. 
+Firstly, pull git submodule `kong-mock-server` and install all npm dependencies for test.
 
 Then, make sure you have installed CLI tool `kong-config-manager` or run `npm link` in the root directory of this project.
 
