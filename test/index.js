@@ -118,7 +118,7 @@ test.serial('v0.11.x should has no cluster endpoint', t => {
   });
   const ret = shell.exec('kcm dump -i sec:test');
 
-  t.is(ret.code, 1);
+  t.is(ret.code, 0);
 });
 
 test.serial('kcm dump -i wrong3', t => {
@@ -153,7 +153,7 @@ test.serial('DEBUG=kcm:dump kcm dump --all', t => {
   )}/apis/api1.json`);
   t.is(api1.name, 'api1');
   t.is(api1.upstream_url, 'httpbin.com');
-  const target1 = require('./main/upstreams_service.v1.xyz_targets/4661f55e-95c2-4011-8fd6-c5c56df1c9db.json');
+  const target1 = require('./main/upstreams_13611da7-703f-44f8-b790-fc1e7bf51b3e_targets/4661f55e-95c2-4011-8fd6-c5c56df1c9db.json');
   t.is(target1.id, '4661f55e-95c2-4011-8fd6-c5c56df1c9db');
   t.is(target1.weight, 15);
   t.true(
