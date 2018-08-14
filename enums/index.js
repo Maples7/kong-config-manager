@@ -46,7 +46,7 @@ module.exports = {
     plugins: 'id',
     certificates: 'id',
     snis: 'name',
-    upstreams: 'name',
+    upstreams: 'id',
     targets: 'id',
     services: 'id',
     routes: 'id'
