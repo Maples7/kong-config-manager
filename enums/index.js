@@ -28,6 +28,15 @@ module.exports = {
       'certificates',
       'snis',
       'upstreams'
+    ],
+    '0.14.x': [
+      'services',
+      'routes',
+      'consumers',
+      'plugins',
+      'certificates',
+      'snis',
+      'upstreams'
     ]
   },
   IDENTIFIRES: {
