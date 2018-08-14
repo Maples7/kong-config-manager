@@ -84,8 +84,8 @@ For example, `kcm-config.json` in the current working directory:
     // `host` is a required field
     "host": "http://localhost:8001",
     // specify which objects are your real concerns to dump and apply
-    // this can be used to avoid too many `consumers` here
-    // see ./enums/index.js to get valid objects with corresponding Kong's version
+    // this can be used to avoid too many `consumers` here and to
+    // dump plugins' configurations such as ACL
     // `targets` are bound up with `upstreams`, so use `upstreams` rather than `targets`
     "objects": ["apis", "plugins", "certificates", "snis", "upstreams"]
   }
