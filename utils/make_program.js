@@ -22,7 +22,8 @@ module.exports = function makeProgram(hasY) {
     .option(
       '-a, --all',
       'whether to operate on all kong instances listed in CLI config file. NOTE: this requires `--file` option rather than `--host`'
-    );
+    )
+    .option('--no-git', 'use this tool without the help of git');
   if (hasY) {
     tmp = tmp.option(
       '-y, --yes',

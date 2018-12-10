@@ -121,6 +121,9 @@ kcm dump --host https://localhost:8444 --instance sec_test
 # use `kcm-config.json` and apply configurations of Kong instance `main`
 kcm apply
 
+# apply configurations of Kong instance `main` without using git to track diffs
+kcm apply --no-git
+
 # use `kcm-config.json` and apply configurations of all Kong instances concurrently
 kcm apply --all
 

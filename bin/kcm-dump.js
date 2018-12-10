@@ -2,9 +2,7 @@
 
 'use strict';
 
-const fs = require('fs');
 const Promise = require('bluebird');
-const chalk = require('chalk');
 const dump = require('../lib/dump');
 const getConfigs = require('../utils/get_configs');
 const logger = require('../utils/logger');
@@ -31,7 +29,9 @@ if (program.host) {
   } else {
     if (!configs[program.instance]) {
       logger.error(
-        `instance ${program.instance} not found in CLI config file ${program.file}`
+        `instance ${program.instance} not found in CLI config file ${
+          program.file
+        }`
       );
     }
     retPromise = dump(configs[program.instance], program.instance);

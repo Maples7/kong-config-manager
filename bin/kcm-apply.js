@@ -41,17 +41,19 @@ function initApply(instance, config) {
   }
 }
 
-if (!shell.which('git')) {
-  logger.error('Sorry, this command requires git');
-}
+if (program.git) {
+  if (!shell.which('git')) {
+    logger.error('Sorry, this command requires git');
+  }
 
-shell.exec('git diff --color');
-console.log();
-if (!program.yes) {
-  if (!readlineSync.keyInYN(chalk.yellow('Confirm change?'))) {
-    console.log();
-    logger.info('Okay, see you! :D');
-    process.exit(0);
+  shell.exec('git diff --color');
+  console.log();
+  if (!program.yes) {
+    if (!readlineSync.keyInYN(chalk.yellow('Confirm change?'))) {
+      console.log();
+      logger.info('Okay, see you! :D');
+      process.exit(0);
+    }
   }
 }
 
@@ -68,7 +70,9 @@ if (program.host) {
   } else {
     if (!configs[program.instance]) {
       logger.error(
-        `instance ${program.instance} not found in CLI config file ${program.file}`
+        `instance ${program.instance} not found in CLI config file ${
+          program.file
+        }`
       );
     }
     retPromise = initApply(program.instance, configs[program.instance]);

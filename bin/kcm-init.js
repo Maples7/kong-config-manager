@@ -3,9 +3,7 @@
 'use strict';
 
 const fs = require('fs');
-const chalk = require('chalk');
 const program = require('commander');
-const fse = require('fs-extra');
 const shell = require('shelljs');
 const pkg = require('../package.json');
 const logger = require('../utils/logger');
@@ -23,6 +21,7 @@ program
     'directory name, default to kong-config',
     'kong-config'
   )
+  .option('--no-git', 'use this tool without the help of git')
   .parse(process.argv);
 
 logger.info(`Ready to make dir ${program.dir}...`);
@@ -34,7 +33,7 @@ if (fs.existsSync(program.dir)) {
   logger.info(`dir ${program.dir} has been created`);
 }
 
-if (shell.exec('git init').code !== 0) {
+if (program.git && shell.exec('git init').code !== 0) {
   logger.error(`fail to git init`);
 }
 
