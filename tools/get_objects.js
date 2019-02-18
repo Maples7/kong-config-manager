@@ -19,7 +19,7 @@ module.exports = function getObjects(url) {
           ? semver.gte(version, '0.14.0')
 	    ? semver.gte(version, '0.34.0')
               ? ENUMS.OBJECTS['0.14.x']
-              ? ENUMS.OBJECTS['0.14.x']
+              : ENUMS.OBJECTS['0.14.x']
 	    : ENUMS.OBJECTS['0.13.x']
           : ENUMS.OBJECTS['0.13.x']
         : ENUMS.OBJECTS['0.11.x']
