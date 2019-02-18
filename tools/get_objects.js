@@ -7,7 +7,22 @@ const ENUMS = require('../enums');
 module.exports = function getObjects(url) {
   return rp(url).then(body => {
     const res = JSON.parse(body);
-    const version = res.version;
+    let version = res.version;
+    // Handle version of enterprise-edition
+    if (version.endsWith('enterprise-edition')) {
+      switch (version) {
+        case '0.33-enterprise-edition':
+          version = '0.13.0';
+          break;
+        case '0.34-enterprise-edition':
+          version = '0.14.0';
+          break;
+        default:
+          version = '0.14.0';
+          break;
+      }
+    }
+
     return semver.gte(version, '0.11.0')
       ? semver.gte(version, '0.13.0')
         ? semver.gte(version, '0.14.0')
