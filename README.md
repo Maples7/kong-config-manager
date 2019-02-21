@@ -1,7 +1,5 @@
 # kong-config-manager
 
-**[ATTENTION] 🥳 _[Kong 1.0 GA is released](https://konghq.com/blog/kong-1-0-ga/) and this tool will be reconstructed to meet the standard of it. It's ongoing!_**
-
 [![Build Status](https://travis-ci.org/Maples7/kong-config-manager.svg?branch=master)](https://travis-ci.org/Maples7/kong-config-manager)
 [![Coverage Status](https://coveralls.io/repos/github/Maples7/kong-config-manager/badge.svg)](https://coveralls.io/github/Maples7/kong-config-manager)
 [![npm version](https://badge.fury.io/js/kong-config-manager.svg)](https://badge.fury.io/js/kong-config-manager)
