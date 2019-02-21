@@ -68,7 +68,7 @@ All you need to do is to remove the file of items you want to delete, then run `
 
 After each `kcm apply`, the tool will exec `dump` automatically to keep your local configuration is always refreshed and the same with the remote Kong configuration.
 
-If you want to review your change before `kcm apply`, you can make good use of `git diff` yourself. Of course, `kcm apply` will ask you to determine changes before applying for real.
+If you want to review your change before `kcm apply`, you can make good use of `git diff` by yourself. Of course, `kcm apply` will ask you to determine changes before applying for real.
 
 ### Examples
 
