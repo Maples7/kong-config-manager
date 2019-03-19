@@ -3,6 +3,7 @@
 const rp = require('request-promise');
 const semver = require('semver');
 const ENUMS = require('../enums');
+const debug = require('debug')('kcm:get-objects');
 
 module.exports = function getObjects(url) {
   return rp({
@@ -13,6 +14,7 @@ module.exports = function getObjects(url) {
     }).then(body => {
     const res = JSON.parse(body);
     let version = res.version;
+    debug(`We obtained this version:${version}`);
     // Handle version of enterprise-edition
     if (version.endsWith('enterprise-edition')) {
       switch (version) {
