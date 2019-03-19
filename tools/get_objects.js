@@ -8,7 +8,7 @@ module.exports = function getObjects(url) {
   return rp({
       method: 'GET',
       uri: url,
-      insecure: true,
+      insecure: true, rejectUnauthorized: false,
       timeout: ENUMS.REQUEST_TIMEOUT
     }).then(body => {
     const res = JSON.parse(body);
