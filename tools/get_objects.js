@@ -5,7 +5,12 @@ const semver = require('semver');
 const ENUMS = require('../enums');
 
 module.exports = function getObjects(url) {
-  return rp(url).then(body => {
+  return rp({
+      method: 'GET',
+      uri: url,
+      insecure: true,
+      timeout: ENUMS.REQUEST_TIMEOUT
+    }).then(body => {
     const res = JSON.parse(body);
     let version = res.version;
     // Handle version of enterprise-edition
