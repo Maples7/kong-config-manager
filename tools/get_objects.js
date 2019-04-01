@@ -5,11 +5,11 @@ const semver = require('semver');
 const ENUMS = require('../enums');
 const debug = require('debug')('kcm:get-objects');
 
-module.exports = function getObjects(url) {
+module.exports = function getObjects(url, ssl) {
   return rp({
       method: 'GET',
       uri: url,
-      insecure: true, rejectUnauthorized: false,
+      insecure: !ssl, rejectUnauthorized: ssl,
       timeout: ENUMS.REQUEST_TIMEOUT
     }).then(body => {
     const res = JSON.parse(body);

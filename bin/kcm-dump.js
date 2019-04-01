@@ -16,7 +16,7 @@ const program = makeProgram(false);
 
 let retPromise = null;
 if (program.host) {
-  retPromise = dump(program.host, program.instance);
+  retPromise = dump(program.host, program.instance, program.ssl);
 } else if (program.file) {
   const configs = getConfigs(program.file);
 
@@ -34,7 +34,7 @@ if (program.host) {
         }`
       );
     }
-    retPromise = dump(configs[program.instance], program.instance);
+    retPromise = dump(configs[program.instance], program.instance, program.ssl);
   }
 }
 

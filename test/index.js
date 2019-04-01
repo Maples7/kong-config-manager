@@ -174,6 +174,16 @@ test.serial('kcm dump --host http://localhost:3001', t => {
   t.is(plugin1.enabled, true);
 });
 
+test.serial('kcm dump --host https://localhost:3001 -k', t => {
+  t.plan(3);
+  const ret = shell.exec('kcm dump --host https://localhost:3001');
+
+  t.is(ret.code, 0);
+  const plugin1 = require('./main/plugins/3d324d84-1sdb-30a5-c043-63b19db421d1.json');
+  t.is(plugin1.name, 'halo-auth');
+  t.is(plugin1.enabled, true);
+});
+
 test.serial('kcm dump --file ./kcm-config.json', t => {
   t.plan(3);
   const ret = shell.exec('kcm dump --file ./kcm-config.json');

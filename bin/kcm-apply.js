@@ -32,9 +32,9 @@ function initApply(instance, config) {
   const host = _.trimEnd(config.host, '/');
   if (fs.existsSync(instancePath)) {
     logger.info(`Ready to apply configs for ${instance}...`);
-    return apply(instancePath, host).then(() => {
+    return apply(instancePath, host, program.ssl).then(() => {
       logger.info(`Success to apply configs for ${instance}!`);
-      return dump(config, instance);
+      return dump(config, instance, program.ssl);
     });
   } else {
     logger.error(`dir ./${instance} does NOT exist for instance ${instance}`);
