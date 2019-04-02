@@ -169,6 +169,8 @@ Then, make sure you have installed CLI tool `kong-config-manager` or run `npm li
 
 Finally, run `npm test`.
 
+To display mock server `logs use npm run log`
+
 ## Relatives
 
 - [kong-mock-server](https://github.com/Maples7/kong-mock-server)
