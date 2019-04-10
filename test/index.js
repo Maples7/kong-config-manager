@@ -3,9 +3,7 @@
 const fs = require('fs');
 const test = require('ava');
 const filenameConverter = require('filename-converter');
-const rp = require('request-promise');
 const shell = require('shelljs');
-const db = require('./kong-mock-server/lib/db');
 const writeJsonSync = require('../utils/write_json_sync');
 
 test.before(t => {
@@ -174,6 +172,33 @@ test.serial('kcm dump --host http://localhost:3001', t => {
   t.is(plugin1.enabled, true);
 });
 
+test.serial('kcm dump --host https://localhost:3443 -k', t => {
+  t.plan(3);
+  const ret = shell.exec('kcm dump --host https://localhost:3443 -k');
+
+  t.is(ret.code, 0);
+  const plugin1 = require('./main/plugins/3d324d84-1sdb-30a5-c043-63b19db421d1.json');
+  t.is(plugin1.name, 'halo-auth');
+  t.is(plugin1.enabled, true);
+});
+
+test.serial('kcm dump --host https://localhost:3443 --no-ssl', t => {
+  t.plan(3);
+  const ret = shell.exec('kcm dump --host https://localhost:3443 --no-ssl');
+
+  t.is(ret.code, 0);
+  const plugin1 = require('./main/plugins/3d324d84-1sdb-30a5-c043-63b19db421d1.json');
+  t.is(plugin1.name, 'halo-auth');
+  t.is(plugin1.enabled, true);
+});
+
+test.serial('kcm dump --host https://localhost:3443 should fail', t => {
+  t.plan(1);
+  const ret = shell.exec('kcm dump --host https://localhost:3443');
+
+  t.not(ret.code, 0);
+});
+
 test.serial('kcm dump --file ./kcm-config.json', t => {
   t.plan(3);
   const ret = shell.exec('kcm dump --file ./kcm-config.json');
@@ -198,7 +223,8 @@ test.serial('DEBUG=kcm:apply kcm apply --yes', t => {
   shell.rm('-rf', './main/consumers/2d324024-8fdb-20a5-g044-62b19db411d1.json');
 
   // disable a plugin - PATCH
-  const plugin1Path = './main/plugins/3d324d84-1sdb-30a5-c043-63b19db421d1.json';
+  const plugin1Path =
+    './main/plugins/3d324d84-1sdb-30a5-c043-63b19db421d1.json';
   const plugin1 = require(plugin1Path);
   plugin1.enabled = false;
   writeJsonSync(plugin1Path, plugin1, { spaces: 2 });
@@ -242,6 +268,52 @@ test.serial(
     t.is(ret.code, 0);
     const plugins = fs.readdirSync('./main/plugins');
     t.is(plugins.length, 1);
+  }
+);
+
+test.serial(
+  'kcm apply --host https://localhost:3443 --no-ssl --instance main --yes',
+  t => {
+    t.plan(2);
+    shell.rm('-rf', './main/plugins/4d924084-1adb-40a5-c042-63b19db421d1.json');
+
+    const ret = shell.exec(
+      'kcm apply --host https://localhost:3443 --no-ssl --instance main --yes'
+    );
+
+    t.is(ret.code, 0);
+    const plugins = fs.readdirSync('./main/plugins');
+    t.is(plugins.length, 1);
+  }
+);
+
+test.serial(
+  'kcm apply --host https://localhost:3443 -k --instance main --yes',
+  t => {
+    t.plan(2);
+    shell.rm('-rf', './main/plugins/4d924084-1adb-40a5-c042-63b19db421d1.json');
+
+    const ret = shell.exec(
+      'kcm apply --host https://localhost:3443 -k --instance main --yes'
+    );
+
+    t.is(ret.code, 0);
+    const plugins = fs.readdirSync('./main/plugins');
+    t.is(plugins.length, 1);
+  }
+);
+
+test.serial(
+  'kcm apply --host https://localhost:3443 --instance main --yes should fail',
+  t => {
+    t.plan(1);
+    shell.rm('-rf', './main/plugins/4d924084-1adb-40a5-c042-63b19db421d1.json');
+
+    const ret = shell.exec(
+      'kcm apply --host https://localhost:3443 --instance main --yes'
+    );
+
+    t.not(ret.code, 0);
   }
 );
 
