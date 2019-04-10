@@ -3,9 +3,7 @@
 const fs = require('fs');
 const test = require('ava');
 const filenameConverter = require('filename-converter');
-const rp = require('request-promise');
 const shell = require('shelljs');
-const db = require('./kong-mock-server/lib/db');
 const writeJsonSync = require('../utils/write_json_sync');
 
 test.before(t => {
@@ -225,7 +223,8 @@ test.serial('DEBUG=kcm:apply kcm apply --yes', t => {
   shell.rm('-rf', './main/consumers/2d324024-8fdb-20a5-g044-62b19db411d1.json');
 
   // disable a plugin - PATCH
-  const plugin1Path = './main/plugins/3d324d84-1sdb-30a5-c043-63b19db421d1.json';
+  const plugin1Path =
+    './main/plugins/3d324d84-1sdb-30a5-c043-63b19db421d1.json';
   const plugin1 = require(plugin1Path);
   plugin1.enabled = false;
   writeJsonSync(plugin1Path, plugin1, { spaces: 2 });

@@ -7,11 +7,12 @@ const debug = require('debug')('kcm:get-objects');
 
 module.exports = function getObjects(url, ssl) {
   return rp({
-      method: 'GET',
-      uri: url,
-      insecure: !ssl, rejectUnauthorized: ssl,
-      timeout: ENUMS.REQUEST_TIMEOUT
-    }).then(body => {
+    method: 'GET',
+    uri: url,
+    insecure: !ssl,
+    rejectUnauthorized: ssl,
+    timeout: ENUMS.REQUEST_TIMEOUT
+  }).then(body => {
     const res = JSON.parse(body);
     let version = res.version;
     debug(`We obtained this version:${version}`);
