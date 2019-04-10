@@ -1,8 +1,8 @@
 language: node_js
 node_js:
-  - "10.15"
-  - "8.11"
-  - "6.1"
+  - '10.15'
+  - '8.11'
+  - '6.1'
 # Handle git submodules yourself
 git:
   submodules: false
@@ -10,8 +10,8 @@ git:
 before_install:
   - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
   - git submodule update --init --recursive
-  - cd ./test/kong-mock-server && npm install --registry=https://registry.npm.taobao.org
-  - cd ../../ 
+  - cd ./test/kong-mock-server && npm install
+  - cd ../../
   - npm link
 after_script:
   - './node_modules/.bin/nyc report --reporter=text-lcov | ./node_modules/.bin/coveralls'
