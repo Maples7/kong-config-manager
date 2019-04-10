@@ -6,7 +6,8 @@
     "kcm": "./bin/kcm.js"
   },
   "scripts": {
-    "test": "app=./test/kong-mock-server/index.js && cmd=./node_modules/pm2/bin/pm2 && INIT_DATA=true ${cmd} start ${app} -f && nyc ava && ${cmd} delete ${app}",
+    "test": "app=./test/kong-mock-server/index.js && cmd=./node_modules/pm2/bin/pm2 && ${cmd} kill;  INIT_DATA=true ${cmd} start ${app} -f && nyc ava",
+    "log": "cmd=./node_modules/pm2/bin/pm2 && ${cmd} log",
     "coverage": "./node_modules/.bin/nyc report --reporter=text-lcov | ./node_modules/.bin/coveralls"
   },
   "ava": {

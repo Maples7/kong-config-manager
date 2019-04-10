@@ -1,3 +1,3 @@
 [submodule "test/kong-mock-server"]
 	path = test/kong-mock-server
-	url = git@github.com:Maples7/kong-mock-server.git
+	url = https://github.com/azachar/kong-mock-server.git

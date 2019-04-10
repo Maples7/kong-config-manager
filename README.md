@@ -118,6 +118,9 @@ kcm dump --instance sec_test
 # use `https://localhost:8444` as host and store configurations in `sec_test` folder
 kcm dump --host https://localhost:8444 --instance sec_test
 
+# use `https://localhost:8444` as host and store configurations in `sec_test` folder using insecure connection (which will ignore ssl errors)
+kcm dump --host https://localhost:8444 --instance sec_test --no-ssl
+
 # use `kcm-config.json` and apply configurations of Kong instance `main`
 kcm apply
 
@@ -135,6 +138,9 @@ kcm apply --instance sec_test
 
 # use `https://localhost:8444` as host and apply configurations in `sec_test` folder
 kcm apply --host https://localhost:8444 --instance sec_test
+
+# use `https://localhost:8444` as host and apply configurations in `sec_test` folder using insecure connection (which will ignore ssl errors)
+kcm apply --host https://localhost:8444 --instance sec_test --no-ssl
 ```
 
 ## Debug
@@ -162,6 +168,8 @@ Firstly, pull git submodule `kong-mock-server` and install all npm dependencies 
 Then, make sure you have installed CLI tool `kong-config-manager` or run `npm link` in the root directory of this project.
 
 Finally, run `npm test`.
+
+To display mock server `logs use npm run log`
 
 ## Relatives
 
