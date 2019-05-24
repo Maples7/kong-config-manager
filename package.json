@@ -6,7 +6,7 @@
     "kcm": "./bin/kcm.js"
   },
   "scripts": {
-    "test": "app=./test/kong-mock-server/index.js && cmd=./node_modules/pm2/bin/pm2 && INIT_DATA=true ${cmd} start ${app} -f && nyc ava && ${cmd} delete ${app}",
+    "test": "unset http_proxy https_proxy && app=./test/kong-mock-server/index.js && cmd=./node_modules/pm2/bin/pm2 && INIT_DATA=true ${cmd} start ${app} -f && nyc ava && ${cmd} delete ${app}",
     "coverage": "./node_modules/.bin/nyc report --reporter=text-lcov | ./node_modules/.bin/coveralls"
   },
   "ava": {
